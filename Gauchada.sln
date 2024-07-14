@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34916.146
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F5E06C8A-4AA5-4B83-ABE7-4EDE2856C56A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{FA99E0A2-9514-4C2A-8951-7CF2BF1791E5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1FB00B77-0EF3-423D-9022-DD4033CA8ACD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gauchada.Backend.API", "Gauchada.Backend.API\Gauchada.Backend.API.csproj", "{75766C1E-75E3-4FA1-8DCA-6C73CB10EE15}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2A8D064A-04C9-46A8-A5F4-3B5053518CB8} = {2A8D064A-04C9-46A8-A5F4-3B5053518CB8}
+		{FDD1F354-9D5B-4AC5-9AAB-6B1F921459D0} = {FDD1F354-9D5B-4AC5-9AAB-6B1F921459D0}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gauchada.Backend.Model", "Gauchada.Backend.Model\Gauchada.Backend.Model.csproj", "{FDD1F354-9D5B-4AC5-9AAB-6B1F921459D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gauchada.Backend.Data", "Gauchada.Backend.Data\Gauchada.Backend.Data.csproj", "{2A8D064A-04C9-46A8-A5F4-3B5053518CB8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FDD1F354-9D5B-4AC5-9AAB-6B1F921459D0} = {FDD1F354-9D5B-4AC5-9AAB-6B1F921459D0}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{75766C1E-75E3-4FA1-8DCA-6C73CB10EE15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75766C1E-75E3-4FA1-8DCA-6C73CB10EE15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75766C1E-75E3-4FA1-8DCA-6C73CB10EE15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75766C1E-75E3-4FA1-8DCA-6C73CB10EE15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDD1F354-9D5B-4AC5-9AAB-6B1F921459D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDD1F354-9D5B-4AC5-9AAB-6B1F921459D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDD1F354-9D5B-4AC5-9AAB-6B1F921459D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDD1F354-9D5B-4AC5-9AAB-6B1F921459D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A8D064A-04C9-46A8-A5F4-3B5053518CB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A8D064A-04C9-46A8-A5F4-3B5053518CB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A8D064A-04C9-46A8-A5F4-3B5053518CB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A8D064A-04C9-46A8-A5F4-3B5053518CB8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FA99E0A2-9514-4C2A-8951-7CF2BF1791E5} = {F5E06C8A-4AA5-4B83-ABE7-4EDE2856C56A}
+		{1FB00B77-0EF3-423D-9022-DD4033CA8ACD} = {FA99E0A2-9514-4C2A-8951-7CF2BF1791E5}
+		{75766C1E-75E3-4FA1-8DCA-6C73CB10EE15} = {1FB00B77-0EF3-423D-9022-DD4033CA8ACD}
+		{FDD1F354-9D5B-4AC5-9AAB-6B1F921459D0} = {1FB00B77-0EF3-423D-9022-DD4033CA8ACD}
+		{2A8D064A-04C9-46A8-A5F4-3B5053518CB8} = {1FB00B77-0EF3-423D-9022-DD4033CA8ACD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {44B55181-109C-4EF6-A8FB-0BFA9DFB6019}
+	EndGlobalSection
+EndGlobal
