@@ -19,5 +19,24 @@
             Birth = birth;
             PhoneNumber = phoneNumber;
         }
+        public override bool Equals(object obj)
+        {
+            var other = obj as PassengerDTO;
+
+            if (other == null)
+                return false;
+
+            return this.UserName == other.UserName &&
+                   this.Name == other.Name &&
+                   this.LastName == other.LastName &&
+                   this.Email == other.Email &&
+                   this.Birth == other.Birth &&
+                   this.PhoneNumber == other.PhoneNumber;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(UserName, Name, LastName, Email, Birth, PhoneNumber);
+        }
     }
 }

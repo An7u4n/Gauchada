@@ -9,20 +9,22 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{FA99
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1FB00B77-0EF3-423D-9022-DD4033CA8ACD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gauchada.Backend.API", "Gauchada.Backend.API\Gauchada.Backend.API.csproj", "{75766C1E-75E3-4FA1-8DCA-6C73CB10EE15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gauchada.Backend.API", "Gauchada.Backend.API\Gauchada.Backend.API.csproj", "{75766C1E-75E3-4FA1-8DCA-6C73CB10EE15}"
 	ProjectSection(ProjectDependencies) = postProject
 		{2A8D064A-04C9-46A8-A5F4-3B5053518CB8} = {2A8D064A-04C9-46A8-A5F4-3B5053518CB8}
 		{FDD1F354-9D5B-4AC5-9AAB-6B1F921459D0} = {FDD1F354-9D5B-4AC5-9AAB-6B1F921459D0}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gauchada.Backend.Model", "Gauchada.Backend.Model\Gauchada.Backend.Model.csproj", "{FDD1F354-9D5B-4AC5-9AAB-6B1F921459D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gauchada.Backend.Model", "Gauchada.Backend.Model\Gauchada.Backend.Model.csproj", "{FDD1F354-9D5B-4AC5-9AAB-6B1F921459D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gauchada.Backend.Data", "Gauchada.Backend.Data\Gauchada.Backend.Data.csproj", "{2A8D064A-04C9-46A8-A5F4-3B5053518CB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gauchada.Backend.Data", "Gauchada.Backend.Data\Gauchada.Backend.Data.csproj", "{2A8D064A-04C9-46A8-A5F4-3B5053518CB8}"
 	ProjectSection(ProjectDependencies) = postProject
 		{FDD1F354-9D5B-4AC5-9AAB-6B1F921459D0} = {FDD1F354-9D5B-4AC5-9AAB-6B1F921459D0}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gauchada.Backend.Services", "Gauchada.Backend.Services\Gauchada.Backend.Services.csproj", "{546A2964-611C-422A-AC4C-D4830404E4EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gauchada.Backend.Services", "Gauchada.Backend.Services\Gauchada.Backend.Services.csproj", "{546A2964-611C-422A-AC4C-D4830404E4EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gauchada.Backend.ApiTest", "ApiTest\Gauchada.Backend.ApiTest.csproj", "{C5B4CBED-B455-4DE6-A062-A453CD8CAE09}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,6 +48,10 @@ Global
 		{546A2964-611C-422A-AC4C-D4830404E4EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{546A2964-611C-422A-AC4C-D4830404E4EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{546A2964-611C-422A-AC4C-D4830404E4EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5B4CBED-B455-4DE6-A062-A453CD8CAE09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5B4CBED-B455-4DE6-A062-A453CD8CAE09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5B4CBED-B455-4DE6-A062-A453CD8CAE09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5B4CBED-B455-4DE6-A062-A453CD8CAE09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +63,7 @@ Global
 		{FDD1F354-9D5B-4AC5-9AAB-6B1F921459D0} = {1FB00B77-0EF3-423D-9022-DD4033CA8ACD}
 		{2A8D064A-04C9-46A8-A5F4-3B5053518CB8} = {1FB00B77-0EF3-423D-9022-DD4033CA8ACD}
 		{546A2964-611C-422A-AC4C-D4830404E4EA} = {1FB00B77-0EF3-423D-9022-DD4033CA8ACD}
+		{C5B4CBED-B455-4DE6-A062-A453CD8CAE09} = {1FB00B77-0EF3-423D-9022-DD4033CA8ACD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {44B55181-109C-4EF6-A8FB-0BFA9DFB6019}
