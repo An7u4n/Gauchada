@@ -4,6 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>7cee5f15-c69b-4a09-a742-f0fa5927e806</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,6 +21,11 @@
   <ItemGroup>
     <ProjectReference Include="..\Gauchada.Backend.Data\Gauchada.Backend.Data.csproj" />
     <ProjectReference Include="..\Gauchada.Backend.Model\Gauchada.Backend.Model.csproj" />
+    <ProjectReference Include="..\Gauchada.Backend.Services\Gauchada.Backend.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

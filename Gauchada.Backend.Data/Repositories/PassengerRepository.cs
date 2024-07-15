@@ -3,16 +3,23 @@ using Gauchada.Backend.Model.Entity;
 
 namespace Gauchada.Backend.Data.Repositories
 {
-    internal class PassengerRepository : IPassengerRepository
+    public class PassengerRepository : IPassengerRepository
     {
-        public void AddPassenger(PassengerEntity passenger)
+        private readonly AppDbContext _context;
+        public PassengerRepository(AppDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public PassengerEntity GetPassengerById(int id)
+        public async Task AddPassenger(PassengerEntity passenger)
         {
-            throw new NotImplementedException();
+            _context.Passengers.Add(passenger);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<PassengerEntity> GetPassengerByUserName(string userName)
+        {
+            return await _context.Passengers.FindAsync(userName);
         }
     }
 }

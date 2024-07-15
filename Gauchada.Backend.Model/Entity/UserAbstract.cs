@@ -1,16 +1,19 @@
-﻿namespace Gauchada.Backend.Model.Entity
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Gauchada.Backend.Model.Entity
 {
     public abstract class UserAbstract
     {
-        public readonly string UserName;
-        public readonly string Name;
-        public readonly string LastName;
-        public readonly string Email;
-        public readonly DateTime Birth;
-        public readonly string PhoneNumber;
-        public readonly byte[] Photo;
+        [Required] [MaxLength(32)] public string UserName { get; set; }
+        [Required] [MaxLength(32)] public string Name { get; set; }
+        [Required] [MaxLength(32)] public string LastName { get; set; }
+        [Required] [EmailAddress] public string Email { get; set; }
+        [Required] public DateTime Birth { get; set; }
+        [Required] [Phone] public string PhoneNumber { get; set; }
 
-        public UserAbstract(string userName, string name, string lastName, string email, DateTime birth, string phoneNumber, byte[] photo)
+        protected UserAbstract() { }
+
+        protected UserAbstract(string userName, string name, string lastName, string email, DateTime birth, string phoneNumber)
         {
             UserName = userName;
             Name = name;
@@ -18,7 +21,6 @@
             Email = email;
             Birth = birth;
             PhoneNumber = phoneNumber;
-            Photo = photo;
         }
     }
 }

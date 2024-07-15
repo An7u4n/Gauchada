@@ -1,9 +1,9 @@
 ﻿using Gauchada.Backend.Model.Entity;
 namespace Gauchada.Backend.Data.Repositories.Interfaces
 {
-    internal interface IPassengerRepository
+    public interface IPassengerRepository
     {
-        void AddPassenger(PassengerEntity passenger);
-        PassengerEntity GetPassengerById(int id);
+        Task AddPassenger(PassengerEntity passenger);
+        Task<PassengerEntity> GetPassengerByUserName(string userName);
     }
 }
