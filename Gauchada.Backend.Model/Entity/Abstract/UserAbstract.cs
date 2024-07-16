@@ -1,15 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Gauchada.Backend.Model.Entity
+namespace Gauchada.Backend.Model.Entity.Abstract
 {
     public abstract class UserAbstract
     {
-        [Required] [MaxLength(32)] public string UserName { get; set; }
-        [Required] [MaxLength(32)] public string Name { get; set; }
-        [Required] [MaxLength(32)] public string LastName { get; set; }
-        [Required] [EmailAddress] public string Email { get; set; }
+        [Key] [Required][MaxLength(32)] public string UserName { get; set; }
+        [Required][MaxLength(32)] public string Name { get; set; }
+        [Required][MaxLength(32)] public string LastName { get; set; }
+        [Required][EmailAddress] public string Email { get; set; }
         [Required] public DateTime Birth { get; set; }
-        [Required] [Phone] public string PhoneNumber { get; set; }
+        [Required][Phone] public string PhoneNumber { get; set; }
 
         protected UserAbstract() { }
 
