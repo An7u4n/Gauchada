@@ -18,7 +18,7 @@ public class PassengerControllerTests
     private readonly DbContextOptions<AppDbContext> _dbContextOptions;
     private readonly AppDbContext _dbContext;
     private readonly Mock<PassengerRepository> _mockPassengerRepository;
-    private readonly Mock<UserService> _userService;
+    private readonly Mock<PassengerService> _userService;
     private readonly PassengersController _controller;
 
     public PassengerControllerTests()
@@ -29,7 +29,7 @@ public class PassengerControllerTests
 
         _dbContext = new AppDbContext(_dbContextOptions);
         _mockPassengerRepository = new Mock<PassengerRepository>(_dbContext);
-        _userService = new Mock<UserService>(_mockPassengerRepository.Object);
+        _userService = new Mock<PassengerService>(_mockPassengerRepository.Object);
         _controller = new PassengersController(_userService.Object);
     }
 
@@ -40,7 +40,7 @@ public class PassengerControllerTests
         string passengerUserName = "nonexistentuser";
 
         // Act
-        var result = await _controller.GetPassengerInfo(passengerUserName);
+        var result = await _controller.GetPassengerByUserName(passengerUserName);
 
         // Assert
         var actionResult = Assert.IsType<ActionResult<ControllerResponse>>(result);
@@ -67,7 +67,7 @@ public class PassengerControllerTests
         _dbContext.Passengers.Add(passengerEntity);
         _dbContext.SaveChanges();
 
-        var passengerDTO = new PassengerDTO(
+        var passengerDTO = new UserDTO(
             passengerEntity.UserName,
             passengerEntity.Name,
             passengerEntity.LastName,
@@ -77,7 +77,7 @@ public class PassengerControllerTests
         );
 
         // Act
-        var result = await _controller.GetPassengerInfo(passengerUserName);
+        var result = await _controller.GetPassengerByUserName(passengerUserName);
 
         // Assert
         var actionResult = Assert.IsType<ActionResult<ControllerResponse>>(result);
@@ -85,5 +85,51 @@ public class PassengerControllerTests
         var response = Assert.IsType<ControllerResponse>(okResult.Value);
         Assert.Equal(passengerDTO, response.Data);
         Assert.Equal("", response.Message);
+    }
+
+    [Fact]
+    public async Task PostPassenger_ReturnOk_WhenDataIsCorrect()
+    {
+        // Arrange
+        var passengerDTO = new UserDTO(
+            "CorrectPassenger",
+            "Miguel",
+            "Centurion",
+            "miguel@hotmail.com",
+            new DateTime(1990, 1, 1),
+            "+54937485147"
+        );
+
+        // Act
+        var result = await _controller.PostPassenger(passengerDTO);
+
+        // Assert
+        var actionResult = Assert.IsType<ActionResult<ControllerResponse>>(result);
+        var okResult = Assert.IsType<OkObjectResult>(actionResult.Result);
+        var response = Assert.IsType<ControllerResponse>(okResult.Value);
+        Assert.Equal("Passenger registered", response.Message);
+    }
+
+    [Fact]
+    public async Task PostPassenger_ReturnBadRequest_WhenBirthIsFuture()
+    {
+        // Arrange
+        var passengerDTO = new UserDTO(
+            "IncorrectUser",
+            "Miguel",
+            "Centurion",
+            "migue@nothotmail.com",
+            new DateTime(2200, 1, 1),
+            "+5493485514064"
+        );
+
+        // Act
+        var result = await _controller.PostPassenger(passengerDTO);
+
+        // Assert
+        var actionResult = Assert.IsType<ActionResult<ControllerResponse>>(result);
+        var badResult = Assert.IsType<BadRequestObjectResult>(actionResult.Result);
+        var response = Assert.IsType<ControllerResponse>(badResult.Value);
+        Assert.Equal("Passenger not registered", response.Message);
     }
 }
