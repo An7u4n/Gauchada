@@ -17,7 +17,7 @@ namespace Gauchada.Backend.Data.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<PassengerEntity> GetPassengerByUserName(string userName)
+        public async Task<PassengerEntity?> GetPassengerByUserName(string userName)
         {
             return await _context.Passengers.FindAsync(userName);
         }

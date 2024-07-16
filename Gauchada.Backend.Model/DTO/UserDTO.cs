@@ -1,6 +1,6 @@
 ﻿namespace Gauchada.Backend.Model.DTO
 {
-    public class PassengerDTO
+    public class UserDTO
     {
         public string UserName { get; set; }
         public string Name { get; set; }
@@ -10,7 +10,7 @@
         public string PhoneNumber { get; set; }
         //public byte[] Photo { get; set; }
 
-        public PassengerDTO(string userName, string name, string lastName, string email, DateTime birth, string phoneNumber)
+        public UserDTO(string userName, string name, string lastName, string email, DateTime birth, string phoneNumber)
         {
             UserName = userName;
             Name = name;
@@ -21,7 +21,7 @@
         }
         public override bool Equals(object obj)
         {
-            var other = obj as PassengerDTO;
+            var other = obj as UserDTO;
 
             if (other == null)
                 return false;

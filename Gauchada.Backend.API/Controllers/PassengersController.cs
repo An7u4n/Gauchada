@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Gauchada.Backend.Model.Entity;
-using Gauchada.Backend.Services;
+using Gauchada.Backend.Services.Interfaces;
 using Gauchada.Backend.Model.DTO;
 using Gauchada.Backend.Model.Response;
 
@@ -10,17 +10,17 @@ namespace Gauchada.Backend.API.Controllers
     [ApiController]
     public class PassengersController : ControllerBase
     {
-        private UserService _userService;
+        private IPassengerService _passengerService;
 
-        public PassengersController(UserService userService)
+        public PassengersController(IPassengerService passengerService)
         {
-            _userService = userService;
+            _passengerService = passengerService;
         }
         
         [HttpGet]
-        public async Task<ActionResult<ControllerResponse>> GetPassengerInfo(string passengerUserName)
+        public async Task<ActionResult<ControllerResponse>> GetPassengerByUserName(string passengerUserName)
         {
-            var passenger = await _userService.GetPassengerByUserName(passengerUserName);
+            var passenger = await _passengerService.GetPassengerByUserName(passengerUserName);
 
             if (passenger == null)
             {
@@ -30,9 +30,9 @@ namespace Gauchada.Backend.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ControllerResponse>> PostPassenger(PassengerDTO passenger)
+        public async Task<ActionResult<ControllerResponse>> PostPassenger(UserDTO passenger)
         {
-            var savedPassenger = await _userService.RegisterPassenger(passenger);
+            var savedPassenger = await _passengerService.AddPassenger(passenger);
             
             if (!savedPassenger)
             {

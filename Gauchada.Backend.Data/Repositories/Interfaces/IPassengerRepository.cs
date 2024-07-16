@@ -4,6 +4,6 @@ namespace Gauchada.Backend.Data.Repositories.Interfaces
     public interface IPassengerRepository
     {
         Task AddPassenger(PassengerEntity passenger);
-        Task<PassengerEntity> GetPassengerByUserName(string userName);
+        Task<PassengerEntity?> GetPassengerByUserName(string userName);
     }
 }

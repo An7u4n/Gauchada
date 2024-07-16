@@ -9,7 +9,7 @@ namespace Gauchada.Backend.Model.Entity
         public ICollection<TripEntity> Trips;
 
         public PassengerEntity() { }
-        public PassengerEntity(PassengerDTO passenger)
+        public PassengerEntity(UserDTO passenger)
         : base(passenger.UserName, passenger.Name, passenger.LastName, passenger.Email, passenger.Birth, passenger.PhoneNumber)
         {
         }
