@@ -20,8 +20,15 @@ namespace Gauchada.Backend.API
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Gauchada.Backend.API")));
-            builder.Services.AddScoped<IPassengerRepository>();
-            builder.Services.AddScoped<IPassengerService>();
+            builder.Services.AddScoped<IPassengerRepository, PassengerRepository>();
+            builder.Services.AddScoped<IPassengerService, PassengerService>();
+            builder.Services.AddScoped<IDriverRepository, DriverRepository>();
+            builder.Services.AddScoped<IDriverService, DriverService>();
+            builder.Services.AddScoped<ICarRepository, CarRepository>();
+            builder.Services.AddScoped<ICarService, CarService>();
+            builder.Services.AddScoped<ITripRepository, TripRepository>();
+            builder.Services.AddScoped<ITripService, TripService>();
+
             var app = builder.Build();
 
             using (var scope = app.Services.CreateScope())

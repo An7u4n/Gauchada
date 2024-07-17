@@ -25,7 +25,7 @@ namespace Gauchada.Backend.API.Controllers
             {
                 return NotFound(ControllerResponse.FailureResponse("Driver Not Found"));
             }
-            return Ok(ControllerResponse.SuccessResponse(driver, ""));
+            return Ok(ControllerResponse.SuccessResponse(driver, "Driver Found"));
         }
 
         [HttpPost]
@@ -35,10 +35,10 @@ namespace Gauchada.Backend.API.Controllers
 
             if (!savedDriver)
             {
-                return BadRequest(ControllerResponse.FailureResponse("Driver not registered"));
+                return BadRequest(ControllerResponse.FailureResponse("Driver Not Registered"));
             }
 
-            return Ok(ControllerResponse.SuccessResponse(null, "Driver registered"));
+            return Ok(ControllerResponse.SuccessResponse(null, "Driver Registered"));
         }
     }
 }

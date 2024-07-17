@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Gauchada.Backend.Data.Repositories
 {
-    internal class DriverRepository : IDriverRepository
+    public class DriverRepository : IDriverRepository
     {
         private readonly AppDbContext _context;
         public DriverRepository(AppDbContext context)

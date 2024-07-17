@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Gauchada.Backend.Services
 {
-    internal class DriverService : IDriverService
+    public class DriverService : IDriverService
     {
         private readonly IDriverRepository _driverRepository;
         public DriverService(IDriverRepository driverRepository)
