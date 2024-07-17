@@ -34,6 +34,11 @@ namespace Gauchada.Backend.Data
                 .WithOne(c => c.Owner)
                 .HasForeignKey(c => c.OwnerUserName);
 
+            modelBuilder.Entity<CarEntity>()
+                .HasMany(c => c.Trips)
+                .WithOne(t => t.Car)
+                .HasForeignKey(t => t.CarPlate);
+
             base.OnModelCreating(modelBuilder);
         }
     }

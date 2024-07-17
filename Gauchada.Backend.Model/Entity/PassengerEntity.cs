@@ -6,7 +6,7 @@ namespace Gauchada.Backend.Model.Entity
     public class PassengerEntity : UserAbstract
     {
 
-        public ICollection<TripEntity> Trips;
+        public ICollection<TripEntity> Trips = new List<TripEntity>();
 
         public PassengerEntity() { }
         public PassengerEntity(UserDTO passenger)

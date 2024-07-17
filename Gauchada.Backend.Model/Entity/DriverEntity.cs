@@ -10,8 +10,8 @@ namespace Gauchada.Backend.Model.Entity
 {
     public class DriverEntity : UserAbstract
     {
-        public ICollection<CarEntity> Cars { get; set; }
-        public ICollection<TripEntity> Trips { get; set; }
+        public ICollection<CarEntity> Cars { get; set; } = new List<CarEntity>();
+        public ICollection<TripEntity> Trips { get; set; } = new List<TripEntity>();
 
         public DriverEntity() { }
         public DriverEntity(UserDTO passenger)

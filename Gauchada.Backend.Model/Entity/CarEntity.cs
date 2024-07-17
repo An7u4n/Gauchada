@@ -16,5 +16,6 @@ namespace Gauchada.Backend.Model.Entity
         [Required] public int MaxPassengers { get; set; }
         [Required] [MaxLength(32)] public string OwnerUserName { get; set; }
         public DriverEntity Owner { get; set; }
+        public ICollection<TripEntity> Trips { get; set; } = new List<TripEntity>();
     }
 }
