@@ -34,10 +34,10 @@ public class PassengerControllerTests
     }
 
     [Fact]
-    public async Task GetPassengerInfo_ReturnsNotFound_WhenPassengerDoesNotExist()
+    public async Task GetPassengerByUserName_ReturnsNotFound_WhenPassengerDoesNotExist()
     {
         // Arrange
-        string passengerUserName = "nonexistentuser";
+        string passengerUserName = "nonexistentpassenger";
 
         // Act
         var result = await _controller.GetPassengerByUserName(passengerUserName);
@@ -50,7 +50,7 @@ public class PassengerControllerTests
     }
 
     [Fact]
-    public async Task GetPassengerInfo_ReturnsOk_WhenPassengerExists()
+    public async Task GetPassengerByUserName_ReturnsOk_WhenPassengerExists()
     {
         // Arrange
         string passengerUserName = "existinguser";
@@ -84,7 +84,7 @@ public class PassengerControllerTests
         var okResult = Assert.IsType<OkObjectResult>(actionResult.Result);
         var response = Assert.IsType<ControllerResponse>(okResult.Value);
         Assert.Equal(passengerDTO, response.Data);
-        Assert.Equal("", response.Message);
+        Assert.Equal("Passenger Found", response.Message);
     }
 
     [Fact]
@@ -107,7 +107,7 @@ public class PassengerControllerTests
         var actionResult = Assert.IsType<ActionResult<ControllerResponse>>(result);
         var okResult = Assert.IsType<OkObjectResult>(actionResult.Result);
         var response = Assert.IsType<ControllerResponse>(okResult.Value);
-        Assert.Equal("Passenger registered", response.Message);
+        Assert.Equal("Passenger Registered", response.Message);
     }
 
     [Fact]
@@ -130,6 +130,6 @@ public class PassengerControllerTests
         var actionResult = Assert.IsType<ActionResult<ControllerResponse>>(result);
         var badResult = Assert.IsType<BadRequestObjectResult>(actionResult.Result);
         var response = Assert.IsType<ControllerResponse>(badResult.Value);
-        Assert.Equal("Passenger not registered", response.Message);
+        Assert.Equal("Passenger Not Registered", response.Message);
     }
 }
