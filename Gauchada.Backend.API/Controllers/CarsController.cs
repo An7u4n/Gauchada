@@ -18,7 +18,7 @@ namespace Gauchada.Backend.API.Controllers
         [HttpGet]
         public async Task<ActionResult<ControllerResponse>> GetCar(string carPlate)
         {
-            var car = await _carService.GetCar(carPlate);
+            var car = await _carService.GetCarByPlate(carPlate);
 
             if (car == null)
             {

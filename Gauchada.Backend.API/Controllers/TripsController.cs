@@ -18,35 +18,59 @@ namespace Gauchada.Backend.API.Controllers
         [HttpGet]
         public async Task<ActionResult<ControllerResponse>> GetTripsByLocations(string origin, string destination)
         {
-            var trips = await _tripService.GetTripsByLocation(origin, destination);
-
-            if (trips == null)
+            try
             {
-                return NotFound(ControllerResponse.FailureResponse("There Isnt Trips Between This Locations"));
+                var trips = await _tripService.GetTripsByLocation(origin, destination);
+                return Ok(ControllerResponse.SuccessResponse(trips, "Trips Found"));
             }
-            return Ok(ControllerResponse.SuccessResponse(trips, "Trips Found"));
+            catch(Exception ex)
+            {
+                return NotFound(ControllerResponse.FailureResponse(ex.Message));
+            }
         }
 
         [HttpPost]
         public async Task<ActionResult<ControllerResponse>> PostTrip(TripDTO trip)
         {
-            var result = await _tripService.SetTrip(trip);
+            try
+            {
+                await _tripService.SetTrip(trip);
+                return Ok(ControllerResponse.SuccessResponse(trip, "Trip Created"));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ControllerResponse.FailureResponse(ex.Message));
+            }
 
-            if (result == true)
-                return BadRequest(ControllerResponse.FailureResponse("Trip Not Created"));
-
-            return Ok(ControllerResponse.SuccessResponse(trip, "Trip Created"));
         }
 
         [HttpPost("AddPassengerToATrip")]
         public async Task<ActionResult<ControllerResponse>> AddPassengerToATrip(int tripId, string passengerUserName)
         {
-            var result = await _tripService.AddPassengerToATrip(tripId, passengerUserName);
+            try
+            {
+                await _tripService.AddPassengerToATrip(tripId, passengerUserName);
+                return Ok(ControllerResponse.SuccessResponse(null, "Passenger Added To The Trip"));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ControllerResponse.FailureResponse(ex.Message));
+            }
 
-            if (result == false)
-                return BadRequest(ControllerResponse.FailureResponse("Passenger Not Added"));
+        }
 
-            return Ok(ControllerResponse.SuccessResponse(null, "Passenger Added To The Trip"));
+        [HttpDelete("RemovePassagerFromATrip")]
+        public async Task<ActionResult<ControllerResponse>> RemovePassengerFromATrip(int tripId, string passengerUserName)
+        {
+            try
+            {
+                await _tripService.RemovePassengerFromATrip(tripId, passengerUserName);
+                return Ok(ControllerResponse.SuccessResponse(null, "Passenger Removed From The Trip"));
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ControllerResponse.FailureResponse(ex.Message));
+            }
         }
     }
 }

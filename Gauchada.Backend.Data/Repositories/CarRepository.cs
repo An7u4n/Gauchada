@@ -11,7 +11,7 @@ namespace Gauchada.Backend.Data.Repositories
             _context = context;
         }
 
-        public async Task<CarEntity?> GetCar(string carPlate)
+        public async Task<CarEntity?> GetCarByPlate(string carPlate)
         {
             return await _context.Cars.FindAsync(carPlate);
         }

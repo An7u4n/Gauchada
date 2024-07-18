@@ -18,9 +18,9 @@ namespace Gauchada.Backend.Services
             throw new NotImplementedException();
         }
 
-        public async Task<CarDTO?> GetCar(string carPlate)
+        public async Task<CarDTO?> GetCarByPlate(string carPlate)
         {
-            var car = await _carRepository.GetCar(carPlate);
+            var car = await _carRepository.GetCarByPlate(carPlate);
             if(car == null)
                 return null;
             return new CarDTO
@@ -53,7 +53,7 @@ namespace Gauchada.Backend.Services
 
             await _carRepository.SaveCar(newCar);
 
-            var savedCar = await _carRepository.GetCar(car.CarPlate);
+            var savedCar = await _carRepository.GetCarByPlate(car.CarPlate);
             if (savedCar == null)
                 return false;
             return true;

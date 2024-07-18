@@ -10,6 +10,6 @@ namespace Gauchada.Backend.Data.Repositories.Interfaces
     public interface ICarRepository
     {
         Task SaveCar(CarEntity car);
-        Task<CarEntity?> GetCar(string carPlate);
+        Task<CarEntity?> GetCarByPlate(string carPlate);
     }
 }
