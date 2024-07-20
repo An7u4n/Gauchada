@@ -46,9 +46,50 @@ namespace Gauchada.Backend.Services
             }
         }
 
-        public Task<List<UserDTO?>> GetUserTrips(string userName)
+        public async Task<List<TripDTO>> GetUserTrips(string passengerUserName)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var trips = await _tripRepository.GetTripsByPassenger(passengerUserName);
+                if(trips == null || trips.Count == 0)
+                    throw new Exception($"No trips found for {passengerUserName}");
+
+                List<TripDTO> tripsDTOs = trips.Select(t => new TripDTO
+                {
+                    CarPlate = t.CarPlate,
+                    DriverUserName = t.DriverUserName,
+                    Origin = t.Origin,
+                    Destination = t.Destination,
+                    StartDate = t.StartDate,
+                    TripId = t.TripId
+                }).ToList();
+                return tripsDTOs;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<List<UserDTO>> GetTripPassengers(int tripId)
+        {
+            try
+            {
+                var passengers = await _tripRepository.GetTripPassengers(tripId);
+                return passengers.Select(p => new UserDTO
+                (
+                    p.UserName,
+                    p.Name,
+                    p.LastName,
+                    p.Email,
+                    p.Birth,
+                    p.PhoneNumber
+                )).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<bool> AddPassengerToATrip(int tripId, string passengerUserName)
@@ -59,6 +100,12 @@ namespace Gauchada.Backend.Services
                     throw new Exception($"Passenger {passengerUserName} doesn't exists");
                 var trip = await _tripRepository.GetTripById(tripId) ??
                     throw new Exception($"Trip {tripId} doesn't exists");
+                if (trip.StartDate < DateTime.Now)
+                    throw new Exception("Trip has started");
+                var car = await _carRepository.GetCarByPlate(trip.CarPlate) ??
+                    throw new Exception($"Car doesn't exists");
+                if (trip.Passengers.Count == car.MaxPassengers - 1)
+                    throw new Exception("Trip is full");
                 await _tripRepository.AddPassengerToATrip(tripId, passengerUserName);
                 return true;
             }
@@ -87,7 +134,7 @@ namespace Gauchada.Backend.Services
             {
                 if (trip.Origin == trip.Destination)
                     throw new Exception("Origin and destination can't be the same");
-                if (trip.StartDate > DateTime.Now)
+                if (trip.StartDate < DateTime.Now)
                     throw new Exception("StartDate can't be in the past");
 
                 var driver = await _driverRepository.GetDriverByUserName(trip.DriverUserName) ?? 

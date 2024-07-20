@@ -23,11 +23,41 @@ namespace Gauchada.Backend.API.Controllers
                 var trips = await _tripService.GetTripsByLocation(origin, destination);
                 return Ok(ControllerResponse.SuccessResponse(trips, "Trips Found"));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return NotFound(ControllerResponse.FailureResponse(ex.Message));
             }
         }
+
+        [HttpGet("GetUserTrips")]
+        public async Task<ActionResult<ControllerResponse>> GetUserTrips(string userName)
+        {
+            try
+            {
+                var trips = await _tripService.GetUserTrips(userName);
+                return Ok(ControllerResponse.SuccessResponse(trips, "Trips Found"));
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ControllerResponse.FailureResponse(ex.Message));
+            }
+        }
+
+        [HttpGet("GetTripPassengers")]
+        public async Task<ActionResult<ControllerResponse>> GetTripPassengers(int tripId)
+        {
+            try
+            {
+                var passengers = await _tripService.GetTripPassengers(tripId);
+                return Ok(ControllerResponse.SuccessResponse(passengers, "Trips Found"));
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ControllerResponse.FailureResponse(ex.Message));
+            }
+        }
+
+        
 
         [HttpPost]
         public async Task<ActionResult<ControllerResponse>> PostTrip(TripDTO trip)
