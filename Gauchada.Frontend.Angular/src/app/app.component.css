@@ -1,0 +1,13 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.app-background {
+  position: absolute;
+  left : 0;
+  top: 0;
+  background-color: #42B0FF;
+  width: 100vw;
+  height: 100vh;
+}
