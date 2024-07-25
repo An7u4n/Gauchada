@@ -83,7 +83,8 @@ namespace Gauchada.Backend.Services
                     p.LastName,
                     p.Email,
                     p.Birth,
-                    p.PhoneNumber
+                    p.PhoneNumber,
+                    p.PhotoSrc
                 )).ToList();
             }
             catch (Exception ex)

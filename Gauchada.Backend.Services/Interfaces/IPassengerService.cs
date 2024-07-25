@@ -3,7 +3,7 @@ namespace Gauchada.Backend.Services.Interfaces
 {
     public interface IPassengerService
     {
-        Task<bool> AddPassenger(UserDTO passenger);
-        Task<UserDTO?> GetPassengerByUserName(string passengerUserName); 
+        Task AddPassenger(AddUserDTO passenger);
+        Task<UserDTO> GetPassengerByUserName(string passengerUserName); 
     }
 }

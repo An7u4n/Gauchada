@@ -10,6 +10,6 @@ namespace Gauchada.Backend.Services.Interfaces
     public interface IDriverService
     {
         public Task<UserDTO?> GetDriverByUserName(string userName);
-        public Task<bool> AddDriver(UserDTO driver);
+        public Task AddDriver(AddUserDTO driver);
     }
 }

@@ -18,26 +18,30 @@ namespace Gauchada.Backend.API.Controllers
         [HttpGet]
         public async Task<ActionResult<ControllerResponse>> GetCar(string carPlate)
         {
-            var car = await _carService.GetCarByPlate(carPlate);
-
-            if (car == null)
+            try
             {
-                return NotFound(ControllerResponse.FailureResponse("Car Not Found"));
+                var car = await _carService.GetCarByPlate(carPlate);
+                return Ok(ControllerResponse.SuccessResponse(car, "Car Found"));
             }
-            return Ok(ControllerResponse.SuccessResponse(car, "Car Found"));
+            catch(Exception ex)
+            {
+                return NotFound(ControllerResponse.FailureResponse(ex.Message));
+            }
         }
 
         [HttpPost]
         public async Task<ActionResult<ControllerResponse>> PostCar(CarDTO car)
         {
-            var savedCar = await _carService.SaveCar(car);
-
-            if (!savedCar)
+            try
             {
-                return BadRequest(ControllerResponse.FailureResponse("Car Not Registered"));
+                await _carService.SaveCar(car);
+                return Ok(ControllerResponse.SuccessResponse(null, "Car Registered"));
             }
+            catch(Exception ex)
+            {
 
-            return Ok(ControllerResponse.SuccessResponse(null, "Car Registered"));
+               return BadRequest(ControllerResponse.FailureResponse(ex.Message));
+            }
         }
     }
 }

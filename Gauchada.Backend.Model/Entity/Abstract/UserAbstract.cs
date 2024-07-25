@@ -10,10 +10,11 @@ namespace Gauchada.Backend.Model.Entity.Abstract
         [Required][EmailAddress] public string Email { get; set; }
         [Required] public DateTime Birth { get; set; }
         [Required][Phone] public string PhoneNumber { get; set; }
+        [Required][MaxLength(255)] public string PhotoSrc { get; set; }
 
         protected UserAbstract() { }
 
-        protected UserAbstract(string userName, string name, string lastName, string email, DateTime birth, string phoneNumber)
+        protected UserAbstract(string userName, string name, string lastName, string email, DateTime birth, string phoneNumber, string photoSrc)
         {
             UserName = userName;
             Name = name;
@@ -21,6 +22,7 @@ namespace Gauchada.Backend.Model.Entity.Abstract
             Email = email;
             Birth = birth;
             PhoneNumber = phoneNumber;
+            PhotoSrc = photoSrc;
         }
     }
 }

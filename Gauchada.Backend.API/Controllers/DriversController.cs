@@ -19,26 +19,31 @@ namespace Gauchada.Backend.API.Controllers
         [HttpGet]
         public async Task<ActionResult<ControllerResponse>> GetDriverByUserName(string driverUserName)
         {
-            var driver = await _driverService.GetDriverByUserName(driverUserName);
-
-            if (driver == null)
+            try
             {
-                return NotFound(ControllerResponse.FailureResponse("Driver Not Found"));
+                var driver = await _driverService.GetDriverByUserName(driverUserName);
+                return Ok(ControllerResponse.SuccessResponse(driver, "Driver Found"));
+
             }
-            return Ok(ControllerResponse.SuccessResponse(driver, "Driver Found"));
+            catch(Exception ex)
+            {
+                return NotFound(ControllerResponse.FailureResponse(ex.Message));
+            }
         }
 
         [HttpPost]
-        public async Task<ActionResult<ControllerResponse>> PostDriver(UserDTO driver)
+        public async Task<ActionResult<ControllerResponse>> PostDriver([FromForm] AddUserDTO driver)
         {
-            var savedDriver = await _driverService.AddDriver(driver);
-
-            if (!savedDriver)
+            try
             {
-                return BadRequest(ControllerResponse.FailureResponse("Driver Not Registered"));
-            }
+                await _driverService.AddDriver(driver);
+                return Ok(ControllerResponse.SuccessResponse(null, "Driver Registered"));
 
-            return Ok(ControllerResponse.SuccessResponse(null, "Driver Registered"));
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ControllerResponse.FailureResponse(ex.Message));
+            }
         }
     }
 }

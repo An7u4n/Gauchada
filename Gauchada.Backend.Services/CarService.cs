@@ -18,20 +18,27 @@ namespace Gauchada.Backend.Services
             throw new NotImplementedException();
         }
 
-        public async Task<CarDTO?> GetCarByPlate(string carPlate)
+        public async Task<CarDTO> GetCarByPlate(string carPlate)
         {
-            var car = await _carRepository.GetCarByPlate(carPlate);
-            if(car == null)
-                return null;
-            return new CarDTO
+            try
             {
-                CarPlate = car.CarPlate,
-                Brand = car.Brand,
-                Model = car.Model,
-                Color = car.Color,
-                OwnerUserName = car.OwnerUserName,
-                MaxPassengers = car.MaxPassengers
-            };
+                var car = await _carRepository.GetCarByPlate(carPlate);
+                if (car == null)
+                    throw new Exception("Car not found");
+                return new CarDTO
+                {
+                    CarPlate = car.CarPlate,
+                    Brand = car.Brand,
+                    Model = car.Model,
+                    Color = car.Color,
+                    OwnerUserName = car.OwnerUserName,
+                    MaxPassengers = car.MaxPassengers
+                };
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public Task<List<CarDTO?>> GetCarsByUserName(string driverUserName)
@@ -39,24 +46,25 @@ namespace Gauchada.Backend.Services
             throw new NotImplementedException();
         }
 
-        public async Task<bool> SaveCar(CarDTO car)
+        public async Task SaveCar(CarDTO car)
         {
-            var newCar = new CarEntity
+            try
             {
-                CarPlate = car.CarPlate,
-                Brand = car.Brand,
-                Model = car.Model,
-                Color = car.Color,
-                OwnerUserName = car.OwnerUserName,
-                MaxPassengers = car.MaxPassengers
-            };
-
-            await _carRepository.SaveCar(newCar);
-
-            var savedCar = await _carRepository.GetCarByPlate(car.CarPlate);
-            if (savedCar == null)
-                return false;
-            return true;
+                var newCar = new CarEntity
+                {
+                    CarPlate = car.CarPlate,
+                    Brand = car.Brand,
+                    Model = car.Model,
+                    Color = car.Color,
+                    OwnerUserName = car.OwnerUserName,
+                    MaxPassengers = car.MaxPassengers
+                };
+                await _carRepository.SaveCar(newCar);
+            }
+            catch(Exception ex)
+            {
+               throw new Exception(ex.Message);
+            }
         }
     }
 }

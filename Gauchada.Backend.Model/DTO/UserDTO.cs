@@ -8,9 +8,9 @@
         public string Email { get; set; }
         public DateTime Birth { get; set; }
         public string PhoneNumber { get; set; }
-        //public byte[] Photo { get; set; }
+        public string PhotoSrc { get; set; }
 
-        public UserDTO(string userName, string name, string lastName, string email, DateTime birth, string phoneNumber)
+        public UserDTO(string userName, string name, string lastName, string email, DateTime birth, string phoneNumber, string photoSrc)
         {
             UserName = userName;
             Name = name;
@@ -18,6 +18,7 @@
             Email = email;
             Birth = birth;
             PhoneNumber = phoneNumber;
+            PhotoSrc = photoSrc;
         }
         public override bool Equals(object obj)
         {

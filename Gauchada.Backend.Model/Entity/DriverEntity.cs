@@ -14,8 +14,8 @@ namespace Gauchada.Backend.Model.Entity
         public ICollection<TripEntity> Trips { get; set; } = new List<TripEntity>();
 
         public DriverEntity() { }
-        public DriverEntity(UserDTO passenger)
-        : base(passenger.UserName, passenger.Name, passenger.LastName, passenger.Email, passenger.Birth, passenger.PhoneNumber)
+        public DriverEntity(AddUserDTO passenger, string photoSrc)
+        : base(passenger.UserName, passenger.Name, passenger.LastName, passenger.Email, passenger.Birth, passenger.PhoneNumber, photoSrc)
         {
         }
     }

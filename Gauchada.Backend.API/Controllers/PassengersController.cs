@@ -3,6 +3,7 @@ using Gauchada.Backend.Model.Entity;
 using Gauchada.Backend.Services.Interfaces;
 using Gauchada.Backend.Model.DTO;
 using Gauchada.Backend.Model.Response;
+using Microsoft.Data.SqlClient;
 
 namespace Gauchada.Backend.API.Controllers
 {
@@ -20,26 +21,29 @@ namespace Gauchada.Backend.API.Controllers
         [HttpGet]
         public async Task<ActionResult<ControllerResponse>> GetPassengerByUserName(string passengerUserName)
         {
-            var passenger = await _passengerService.GetPassengerByUserName(passengerUserName);
-
-            if (passenger == null)
+            try
             {
-                return NotFound(ControllerResponse.FailureResponse("Passager Not Found"));
+                var passenger = await _passengerService.GetPassengerByUserName(passengerUserName);
+                return Ok(ControllerResponse.SuccessResponse(passenger, "Passenger Found"));
             }
-            return Ok(ControllerResponse.SuccessResponse(passenger, "Passenger Found"));
+            catch (Exception ex)
+            {
+                return NotFound(ControllerResponse.FailureResponse(ex.Message));
+            }
         }
 
         [HttpPost]
-        public async Task<ActionResult<ControllerResponse>> PostPassenger(UserDTO passenger)
+        public async Task<ActionResult<ControllerResponse>> PostPassenger([FromForm] AddUserDTO passenger)
         {
-            var savedPassenger = await _passengerService.AddPassenger(passenger);
-            
-            if (!savedPassenger)
+            try
             {
-                return BadRequest(ControllerResponse.FailureResponse("Passenger Not Registered"));
+                await _passengerService.AddPassenger(passenger);
+                return Ok(ControllerResponse.SuccessResponse(null, "Passenger Registered"));
             }
-            
-            return Ok(ControllerResponse.SuccessResponse(null, "Passenger Registered"));
+            catch (Exception ex)
+            {
+                return BadRequest(ControllerResponse.FailureResponse(ex.Message));
+            }
         }
     }
 }

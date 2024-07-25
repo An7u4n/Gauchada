@@ -28,6 +28,7 @@ namespace Gauchada.Backend.API
             builder.Services.AddScoped<ICarService, CarService>();
             builder.Services.AddScoped<ITripRepository, TripRepository>();
             builder.Services.AddScoped<ITripService, TripService>();
+            builder.Services.AddTransient<IFileStorageService, FileStorageService>();
 
             var app = builder.Build();
 
