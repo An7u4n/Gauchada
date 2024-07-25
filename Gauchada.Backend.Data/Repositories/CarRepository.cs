@@ -1,5 +1,6 @@
 ﻿using Gauchada.Backend.Data.Repositories.Interfaces;
 using Gauchada.Backend.Model.Entity;
+using Microsoft.Data.SqlClient;
 
 namespace Gauchada.Backend.Data.Repositories
 {
@@ -13,13 +14,35 @@ namespace Gauchada.Backend.Data.Repositories
 
         public async Task<CarEntity?> GetCarByPlate(string carPlate)
         {
-            return await _context.Cars.FindAsync(carPlate);
+            try
+            {
+                return await _context.Cars.FindAsync(carPlate);
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("DB Error: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Unknow Error In Repository: " + ex.Message);
+            }
         }
 
         public async Task SaveCar(CarEntity car)
         {
-            _context.Cars.Add(car);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Cars.Add(car);
+                await _context.SaveChangesAsync();
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("DB Error: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Unknow Error In Repository: " + ex.Message);
+            }
         }
     }
 }
