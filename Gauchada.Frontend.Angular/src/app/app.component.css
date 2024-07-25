@@ -11,3 +11,10 @@
   width: 100vw;
   height: 100vh;
 }
+
+.button{
+  position: absolute;
+  height:50px;
+  width: 100px;
+  background-color: #42B0FF;
+}

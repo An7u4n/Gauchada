@@ -11,17 +11,18 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^17.0.0",
+    "@Angular/cli": "npm:@angular/cli@^17.3.8",
     "@angular/common": "^17.0.0",
     "@angular/compiler": "^17.0.0",
     "@angular/core": "^17.0.0",
-    "@angular/forms": "^17.0.0",
+    "@angular/forms": "^17.3.12",
     "@angular/platform-browser": "^17.0.0",
     "@angular/platform-browser-dynamic": "^17.0.0",
     "@angular/router": "^17.0.0",
+    "jest-editor-support": "*",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.14.2",
-    "jest-editor-support": "*"
+    "zone.js": "~0.14.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^17.0.9",
