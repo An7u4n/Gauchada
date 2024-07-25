@@ -8,6 +8,9 @@ using Gauchada.Backend.Data.Repositories;
 using Gauchada.Backend.Services;
 using Gauchada.Backend.Model.Entity;
 using Gauchada.Backend.Model.DTO;
+using Gauchada.Backend.Services.Interfaces;
+using Microsoft.AspNetCore.Http;
+using System.Text;
 
 namespace Gauchada.Backend.ApiTest
 {
@@ -16,7 +19,8 @@ namespace Gauchada.Backend.ApiTest
         private readonly DbContextOptions<AppDbContext> _dbContextOptions;
         private readonly AppDbContext _dbContext;
         private readonly Mock<DriverRepository> _mockDriverRepository;
-        private readonly Mock<DriverService> _driverService;
+        private readonly Mock<IFileStorageService> _mockFileStorageService;
+        private readonly Mock<DriverService> _mockDriverService;
         private readonly DriversController _controller;
         public DriversControllerTests()
         {
@@ -26,8 +30,9 @@ namespace Gauchada.Backend.ApiTest
             _dbContext = new AppDbContext(_dbContextOptions);
 
             _mockDriverRepository = new Mock<DriverRepository>(_dbContext);
-            _driverService = new Mock<DriverService>(_mockDriverRepository.Object);
-            _controller = new DriversController(_driverService.Object);
+            _mockFileStorageService = new Mock<IFileStorageService>();
+            _mockDriverService = new Mock<DriverService>(_mockDriverRepository.Object, _mockFileStorageService.Object);
+            _controller = new DriversController(_mockDriverService.Object);
         }
 
         [Fact]
@@ -43,7 +48,7 @@ namespace Gauchada.Backend.ApiTest
             var actionResult = Assert.IsType<ActionResult<ControllerResponse>>(result);
             var notFoundResult = Assert.IsType<NotFoundObjectResult>(actionResult.Result);
             var response = Assert.IsType<ControllerResponse>(notFoundResult.Value);
-            Assert.Equal("Driver Not Found", response.Message);
+            Assert.Equal("Driver not found", response.Message);
         }
 
         [Fact]
@@ -58,7 +63,8 @@ namespace Gauchada.Backend.ApiTest
                 LastName = "Gonzalez",
                 Email = "miguel@hotmail.com",
                 Birth = new DateTime(1990, 1, 1),
-                PhoneNumber = "123456789"
+                PhoneNumber = "123456789",
+                PhotoSrc = "photo.jpg"
             };
             _dbContext.Drivers.Add(driverEntity);
             _dbContext.SaveChanges();
@@ -69,7 +75,8 @@ namespace Gauchada.Backend.ApiTest
                  driverEntity.LastName,
                  driverEntity.Email,
                  driverEntity.Birth,
-                 driverEntity.PhoneNumber
+                 driverEntity.PhoneNumber,
+                 driverEntity.PhotoSrc
              );
 
             // Act
@@ -88,16 +95,18 @@ namespace Gauchada.Backend.ApiTest
         {
             // Arrange
             string driverUserName = "correctdriver";
-
-
-            var driverDTO = new UserDTO(
+            var driverDTO = new AddUserDTO(
                 driverUserName,
                 "Miguel",
                 "Gonzalez",
                 "miguel@hotmail.com",
                 new DateTime(1990, 1, 1),
-                "123456789"
+                "123456789",
+                CreateFakeImage()
              );
+
+            _mockFileStorageService.Setup(s => s.SaveFileAsync(It.IsAny<IFormFile>(), It.IsAny<string[]>(), It.IsAny<string>()))
+            .ReturnsAsync("testImage.jpg");
 
             // Act
             var result = await _controller.PostDriver(driverDTO);
@@ -107,6 +116,20 @@ namespace Gauchada.Backend.ApiTest
             var okResult = Assert.IsType<OkObjectResult>(actionResult.Result);
             var response = Assert.IsType<ControllerResponse>(okResult.Value);
             Assert.Equal("Driver Registered", response.Message);
+        }
+
+        // Image Faking method
+        private IFormFile CreateFakeImage()
+        {
+            var fileContent = "This is a test image";
+            var fileName = "testImage.png";
+            var stream = new MemoryStream(Encoding.UTF8.GetBytes(fileContent));
+            var formFile = new FormFile(stream, 0, stream.Length, "testImage", fileName)
+            {
+                Headers = new HeaderDictionary(),
+                ContentType = "image/jpg"
+            };
+            return formFile;
         }
     }
 }

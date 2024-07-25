@@ -133,7 +133,8 @@ public class TripsControllerTests : IDisposable
             LastName = "passengerlastname",
             Email = "passengeremail@hot.com",
             Birth = DateTime.Now,
-            PhoneNumber = "+54938961681"
+            PhoneNumber = "+54938961681",
+            PhotoSrc = "photo.jpg"
         });
         _dbContext.SaveChanges();
 
@@ -148,20 +149,31 @@ public class TripsControllerTests : IDisposable
     }
 
     [Fact]
-    public async Task AddPassengerToATrip_ReturnOk_WhenTripIsAdded()
+    public async Task AddPassengerToATrip_ReturnOk_WhenTripExists()
     {
         // Arrange
         int tripId = 1;
         string passengerUserName = "addedpassenger";
 
+        _dbContext.Cars.Add(new CarEntity()
+        {
+            CarPlate = "carplate",
+            Brand = "brand",
+            Model = "model",
+            Color = "color",
+            OwnerUserName = "driverusername",
+            MaxPassengers = 4
+        });
+        _dbContext.SaveChanges();
         _dbContext.Trips.Add(new TripEntity()
         {
             CarPlate = "carplate",
             Destination = "destination",
             DriverUserName = "driverusername",
             Origin = "origin",
-            StartDate = DateTime.Now,
-            TripId = tripId
+            StartDate = DateTime.Now.AddDays(1),
+            TripId = tripId,
+            Car = _dbContext.Cars.First()
         });
         _dbContext.Passengers.Add(new PassengerEntity()
         {
@@ -169,8 +181,9 @@ public class TripsControllerTests : IDisposable
             Name = "passengername",
             LastName = "passengerlastname",
             Email = "passengeremail@hot.com",
-            Birth = DateTime.Now,
-            PhoneNumber = "+54938961681"
+            Birth = DateTime.Now.AddDays(-1),
+            PhoneNumber = "+54938961681",
+            PhotoSrc = "photo.jpg"
         });
         _dbContext.SaveChanges();
 
@@ -196,7 +209,7 @@ public class TripsControllerTests : IDisposable
             Destination = "destination",
             DriverUserName = driverUserName,
             Origin = "origin",
-            StartDate = DateTime.Now,
+            StartDate = DateTime.Now.AddDays(1),
             TripId = tripId
         };
 
@@ -223,7 +236,8 @@ public class TripsControllerTests : IDisposable
             Email = "asd@asd.com",
             Birth = DateTime.Now,
             PhoneNumber = "+54938961681",
-            UserName = driverUserName
+            UserName = driverUserName,
+            PhotoSrc = "photo.jpg"
         });
         _dbContext.SaveChanges();
 
