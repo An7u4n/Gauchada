@@ -8,6 +8,6 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\Gauchada.Frontend.Angular\browser\</BuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="src\app\Components\" />
+    <Folder Include="src\app\Services\" />
   </ItemGroup>
 </Project>

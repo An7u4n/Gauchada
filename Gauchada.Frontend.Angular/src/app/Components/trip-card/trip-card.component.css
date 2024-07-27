@@ -1,0 +1,70 @@
+.card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 500px;
+  height: 250px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.driver-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 30%;
+}
+
+.driver-photo {
+  width: 100px;
+  height: 100px;
+  background-color: #ddd;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: #555;
+  margin-top: 10px;
+}
+
+.driver-name span {
+  color: #888;
+}
+
+.driver-name strong {
+  color: #007bff;
+  font-size: 20px;
+}
+
+.trip-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60%;
+  text-align: center;
+}
+
+.location {
+  margin: 0;
+}
+
+.city {
+  font-size: 24px;
+  font-weight: bold;
+  display: block;
+}
+
+.time {
+  font-size: 16px;
+  color: #888;
+}
+
+.arrow {
+  font-size: 36px;
+  color: #555;
+}

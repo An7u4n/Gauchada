@@ -1,0 +1,96 @@
+.container {
+  width: 1000px;
+  height: 600px;
+  background-color: white;
+  box-shadow: 0px 10px 20px rgba(0,0,0,0.3);
+}
+
+h2{
+  margin-left: 5%;
+  font-size: 32px;
+  margin-bottom: 0;
+}
+
+form {
+  display: flex;
+  -ms-flex-direction: column;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.text-container {
+  display: flex;
+  -webkit-justify-content: inherit;
+  justify-content: inherit;
+}
+
+.input-container{
+  display: flex;
+  flex-direction: column;
+  margin-top: 5%;
+
+}
+
+input {
+  color: #000000;
+  margin-bottom: 3%;
+  border: .5px solid rgb(194, 194, 194);
+  background-color: transparent;
+  height: 35px;
+  padding: 10px;
+  width: 280px;
+  transform: scale(1);
+  transition: 0.3s;
+}
+
+.text-container {
+  display: flex;
+  justify-content: center;
+  gap: 7vw;
+  margin-bottom: 3%;
+}
+
+button[type=submit]{
+    margin-top: 20px;
+}
+
+p{
+    font-weight: 600;
+}
+
+/* calendar */
+
+calendar-date {
+  &::part(button) {
+  border: none;
+  background-color: #42B0FF;
+  border-radius: 5px;
+  width: 26px;
+  height: 26px;
+  }
+  &::part(container) {
+      gap: 10px;
+  }
+}
+
+calendar-month {
+  &::part(head) {
+    color: #42B0FF;
+  }
+  &::part(heading){
+    font-weight: 600;
+  }
+  gap: 0px;
+  --color-accent: #42B0FF;
+  --color-text-on-accent: #ffffff;
+}
+
+svg {
+  height: 16px;
+  width: 16px;
+  fill: none;
+  stroke: white;
+  stroke-width: 5;
+}
