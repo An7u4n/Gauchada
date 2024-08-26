@@ -34,7 +34,7 @@ public class TripsControllerTests : IDisposable
         _mockPassengerRepository = new Mock<PassengerRepository>(_dbContext);
         _tripService = new Mock<TripService>(_mockTripRepository.Object, _mockDriverRepository.Object, _mockCarRepository.Object, _mockPassengerRepository.Object);
         _controller = new TripsController(_tripService.Object);
-    }   
+    }
 
     public void Dispose()
     {
@@ -68,16 +68,29 @@ public class TripsControllerTests : IDisposable
     public async Task GetTripsByLocations_ReturnsOkAndTrips_WhenThereIsTripsForThatTwoCities()
     {
         // Arrange
+        int tripId = 1;
         string origin = "originwithtrips";
         string destination = "destinationwithtrips";
 
+        _dbContext.Cars.Add(new CarEntity()
+        {
+            CarPlate = "carplate",
+            Brand = "brand",
+            Model = "model",
+            Color = "color",
+            OwnerUserName = "driverusername",
+            MaxPassengers = 4
+        });
+        _dbContext.SaveChanges();
         _dbContext.Trips.Add(new TripEntity()
         {
             CarPlate = "carplate",
             Destination = destination,
             DriverUserName = "driverusername",
             Origin = origin,
-            StartDate = DateTime.Now
+            StartDate = DateTime.Now.AddDays(1),
+            TripId = tripId,
+            Car = _dbContext.Cars.First()
         });
         _dbContext.SaveChanges();
 

@@ -14,25 +14,34 @@ using System.Text;
 
 namespace Gauchada.Backend.ApiTest
 {
-    public class DriversControllerTests
+    public class DriversControllerTests : IDisposable
     {
         private readonly DbContextOptions<AppDbContext> _dbContextOptions;
-        private readonly AppDbContext _dbContext;
-        private readonly Mock<DriverRepository> _mockDriverRepository;
-        private readonly Mock<IFileStorageService> _mockFileStorageService;
-        private readonly Mock<DriverService> _mockDriverService;
-        private readonly DriversController _controller;
+        private AppDbContext? _dbContext;
+        private Mock<DriverRepository>? _mockDriverRepository;
+        private Mock<IFileStorageService>? _mockFileStorageService;
+        private Mock<DriverService>? _mockDriverService;
+        private DriversController? _controller;
         public DriversControllerTests()
         {
             _dbContextOptions = new DbContextOptionsBuilder<AppDbContext>()
-            .UseInMemoryDatabase(databaseName: "TestDatabase")
-            .Options;
+                .UseInMemoryDatabase(databaseName: "DriverTestDatabase")
+                .Options;
             _dbContext = new AppDbContext(_dbContextOptions);
 
             _mockDriverRepository = new Mock<DriverRepository>(_dbContext);
             _mockFileStorageService = new Mock<IFileStorageService>();
             _mockDriverService = new Mock<DriverService>(_mockDriverRepository.Object, _mockFileStorageService.Object);
             _controller = new DriversController(_mockDriverService.Object);
+        }
+
+        public void Dispose()
+        {
+            _dbContext.Dispose();
+            _mockDriverRepository = null;
+            _mockFileStorageService = null;
+            _mockDriverService = null;
+            _controller = null;
         }
 
         [Fact]
