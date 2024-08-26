@@ -14,7 +14,6 @@ namespace Gauchada.Backend.Data.Repositories
             _context = context;
         }
 
-
         public async Task CreateTrip(TripEntity trip)
         {
             try
@@ -36,7 +35,7 @@ namespace Gauchada.Backend.Data.Repositories
         {
             try
             {
-                return await _context.Trips.Where(t => t.Origin == origin && t.Destination == destination).ToListAsync();
+                return await _context.Trips.Where(t => t.Origin == origin && t.Destination == destination && t.StartDate > DateTime.Now).ToListAsync();
             }
             catch (SqlException ex)
             {
@@ -143,8 +142,35 @@ namespace Gauchada.Backend.Data.Repositories
 
         public async Task<List<PassengerEntity>> GetTripPassengers(int tripId)
         {
-            var trip = await _context.Trips.Include(t => t.Passengers).FirstOrDefaultAsync(t => t.TripId == tripId);
-            return trip.Passengers.ToList();
+            try
+            {
+                var trip = await _context.Trips.Include(t => t.Passengers).FirstOrDefaultAsync(t => t.TripId == tripId);
+                return trip.Passengers.ToList();
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("DB Error: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Unknow Error In Repository: " + ex.Message);
+            }
+        }
+
+        public async Task<List<TripEntity>?> GetTripsByLocationsAndDate(string origin, string destination, DateTime startDate)
+        {
+            try
+            {
+                return await _context.Trips.Include(t => t.Car).Include(t => t.Driver).Where(t => t.Origin == origin && t.Destination == destination && t.StartDate.Date == startDate.Date).ToListAsync();
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("DB Error: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Unknow Error In Repository: " + ex.Message);
+            }
         }
     }
 }

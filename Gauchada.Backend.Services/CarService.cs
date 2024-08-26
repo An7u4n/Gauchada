@@ -41,9 +41,28 @@ namespace Gauchada.Backend.Services
             }
         }
 
-        public Task<List<CarDTO?>> GetCarsByUserName(string driverUserName)
+        public async Task<List<CarDTO>> GetCarsByUserName(string driverUserName)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var cars = await _carRepository.GetCarsByUserName(driverUserName);
+                if (cars == null)
+                    throw new Exception("Cars not found");
+                return cars.Select(c => new CarDTO
+                {
+                    CarPlate = c.CarPlate,
+                    Brand = c.Brand,
+                    Model = c.Model,
+                    Color = c.Color,
+                    OwnerUserName = c.OwnerUserName,
+                    MaxPassengers = c.MaxPassengers
+                }).ToList();
+
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task SaveCar(CarDTO car)

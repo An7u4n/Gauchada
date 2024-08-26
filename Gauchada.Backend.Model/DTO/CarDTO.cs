@@ -14,5 +14,19 @@ namespace Gauchada.Backend.Model.DTO
         public string Color { get; set; }
         public string OwnerUserName { get; set; }
         public int MaxPassengers { get; set; }
+        public override bool Equals(object obj)
+        {
+            var other = obj as CarDTO;
+
+            if (other == null)
+                return false;
+
+            return this.CarPlate == other.CarPlate &&
+                   this.Brand == other.Brand &&
+                   this.Model == other.Model &&
+                   this.Color == other.Color &&
+                   this.OwnerUserName == other.OwnerUserName &&
+                   this.MaxPassengers == other.MaxPassengers;
+        }
     }
 }

@@ -16,6 +16,8 @@ namespace Gauchada.Backend.Data.Repositories
         {
             try
             {
+                if (_context.Passengers.Find(passenger.UserName) != null)
+                    throw new Exception("Passenger Already Exists");
                 _context.Passengers.Add(passenger);
                 await _context.SaveChangesAsync();
             }

@@ -11,5 +11,6 @@ namespace Gauchada.Backend.Data.Repositories.Interfaces
     {
         Task SaveCar(CarEntity car);
         Task<CarEntity?> GetCarByPlate(string carPlate);
+        Task<List<CarEntity>?> GetCarsByUserName(string userName);
     }
 }

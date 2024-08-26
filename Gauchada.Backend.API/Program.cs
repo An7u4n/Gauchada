@@ -29,6 +29,16 @@ namespace Gauchada.Backend.API
             builder.Services.AddScoped<ITripRepository, TripRepository>();
             builder.Services.AddScoped<ITripService, TripService>();
             builder.Services.AddTransient<IFileStorageService, FileStorageService>();
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:4200")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
+            });
 
             var app = builder.Build();
 
@@ -37,6 +47,8 @@ namespace Gauchada.Backend.API
                 var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
                 context.Database.Migrate();
             }
+
+            app.UseCors();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

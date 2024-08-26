@@ -22,6 +22,8 @@ namespace Gauchada.Backend.Data.Repositories
         {
             try
             {
+                if(_context.Drivers.Find(driver.UserName) != null)
+                    throw new Exception("Driver Already Exists");
                 _context.Drivers.Add(driver);
                 await _context.SaveChangesAsync();
             }
@@ -40,7 +42,6 @@ namespace Gauchada.Backend.Data.Repositories
             try
             {
                 return await _context.Drivers.FindAsync(driverUserName);
-
             }
             catch (SqlException ex)
             {

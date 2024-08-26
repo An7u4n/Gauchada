@@ -29,6 +29,20 @@ namespace Gauchada.Backend.API.Controllers
             }
         }
 
+        [HttpGet("GetCarsByUserName")]
+        public async Task<ActionResult<ControllerResponse>> GetCarsByUserName(string userName)
+        {
+            try
+            {
+                var cars = await _carService.GetCarsByUserName(userName);
+                return Ok(ControllerResponse.SuccessResponse(cars, "User Cars Found"));
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ControllerResponse.FailureResponse(ex.Message));
+            }
+        }
+
         [HttpPost]
         public async Task<ActionResult<ControllerResponse>> PostCar(CarDTO car)
         {
