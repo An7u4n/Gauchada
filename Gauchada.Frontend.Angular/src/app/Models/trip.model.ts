@@ -1,4 +1,4 @@
-import { Driver } from "./driver.model";
+import { Driver } from "./user.model";
 
 export class Trip {
   constructor(

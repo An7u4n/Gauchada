@@ -1,0 +1,43 @@
+<div class="register-container">
+  <form
+    [formGroup]="registerForm"
+    (ngSubmit)="register()"
+    class="register-form"
+  >
+    <h1>Register</h1>
+    <div class="input-container">
+      <input placeholder="UserName" type="text" formControlName="username" />
+      <input
+        class="password"
+        placeholder="Password"
+        [type]="show ? 'text' : 'password'"
+        formControlName="password"
+      />
+      <input placeholder="Name" type="text" formControlName="name" />
+      <input placeholder="Last Name" type="text" formControlName="lastName" />
+      <input placeholder="Email" type="email" formControlName="email" />
+      <input
+        placeholder="PhoneNumber"
+        type="number"
+        formControlName="phoneNumber"
+      />
+      <input placeholder="Birth" type="date" formControlName="birth" />
+      <input type="file" (change)="onFileChange($event)" />
+      <div class="user-type-container">
+        UserType:
+        <span class="user-type-buttons">
+          <input type="radio" formControlName="userType" value="passenger" />
+          Passenger
+          <input type="radio" formControlName="userType" value="driver" />
+          Driver
+        </span>
+      </div>
+    </div>
+    <div class="btn-container">
+      <button class="button secondary" type="button" (click)="login()">
+        Login
+      </button>
+      <button class="primary button" type="submit">Register</button>
+    </div>
+  </form>
+</div>

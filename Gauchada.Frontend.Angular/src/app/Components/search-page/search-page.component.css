@@ -60,6 +60,12 @@ p{
     font-weight: 600;
 }
 
+.search-exception-message {
+  color: #b43333;
+  font-weight: 600;
+  margin-top: 0.5vh;
+}
+
 /* calendar */
 
 calendar-date {

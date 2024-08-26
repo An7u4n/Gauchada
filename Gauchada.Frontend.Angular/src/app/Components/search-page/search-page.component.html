@@ -1,21 +1,25 @@
 <div class="container">
   <app-header></app-header>
   <h2>Search a Trip</h2>
-  <form>
+  <form (ngSubmit)="searchTrips($event)">
     <div class="text-container">
       <div class="input-container">
         <p>Date</p>
         <calendar-date>
-          <svg aria-label="Previous"
-               slot="previous"
-               xmlns="http://www.w3.org/2000/svg"
-               viewBox="0 0 24 24">
+          <svg
+            aria-label="Previous"
+            slot="previous"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
             <path d="M15.75 19.5 8.25 12l7.5-7.5"></path>
           </svg>
-          <svg aria-label="Next"
-               slot="next"
-               xmlns="http://www.w3.org/2000/svg"
-               viewBox="0 0 24 24">
+          <svg
+            aria-label="Next"
+            slot="next"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
             <path d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
           </svg>
           <calendar-month></calendar-month>
@@ -24,12 +28,24 @@
 
       <div class="input-container">
         <p>Origin</p>
-        <input placeholder="Origin" type="text" formControlName="origin">
+        <input
+          placeholder="Origin"
+          type="text"
+          [(ngModel)]="formData.origin"
+          name="origin"
+        />
         <p>Destination</p>
-        <input placeholder="Destination" type="text" formControlName="destination" />
+        <input
+          placeholder="Destination"
+          type="text"
+          [(ngModel)]="formData.destination"
+          name="destination"
+        />
         <button class="primary button" type="submit">Search Trips</button>
+        <span class="search-exception-message" *ngIf="searchError">
+          {{ searchError }}
+        </span>
       </div>
     </div>
-
   </form>
 </div>
