@@ -1,0 +1,60 @@
+<div class="container">
+  <app-header></app-header>
+  <h2>Create a New Trip</h2>
+  <form (ngSubmit)="postTrip($event, myCalendar)">
+    <div class="text-container">
+      <div class="input-container">
+        <p>Trip Start Day</p>
+        <calendar-date #myCalendar id="my-calendar">
+          <svg
+            aria-label="Previous"
+            slot="previous"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <path d="M15.75 19.5 8.25 12l7.5-7.5"></path>
+          </svg>
+          <svg
+            aria-label="Next"
+            slot="next"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <path d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
+          </svg>
+          <calendar-month></calendar-month>
+        </calendar-date>
+        <p>Select Trip Car</p>
+        <select name="car" [(ngModel)]="formData.carPlate">
+          <option *ngFor="let car of cars" [value]="car.carPlate">
+            {{
+              car.carPlate + " " + car.brand + " " + car.model + " " + car.color
+            }}
+          </option>
+        </select>
+      </div>
+      <div class="input-container">
+        <p>Origin</p>
+        <input
+          placeholder="Origin"
+          type="text"
+          [(ngModel)]="formData.origin"
+          name="origin"
+        />
+        <p>Destination</p>
+        <input
+          placeholder="Destination"
+          type="text"
+          [(ngModel)]="formData.destination"
+          name="destination"
+        />
+        <p>Hour</p>
+        <input type="time" [(ngModel)]="formData.hour" name="origin" />
+        <button class="primary button" type="submit">Create Trip</button>
+        <span class="post-exception-message" *ngIf="postError">
+          {{ postError }}
+        </span>
+      </div>
+    </div>
+  </form>
+</div>

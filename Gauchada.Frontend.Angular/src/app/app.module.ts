@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import "cally";
 import { RegisterComponent } from './Components/register/register.component';
+import { PostTripComponent } from './Components/post-trip/post-trip.component';
 
 @NgModule({
   declarations: [
@@ -19,12 +20,13 @@ import { RegisterComponent } from './Components/register/register.component';
     TripCardComponent,
     SearchPageComponent,
     HeaderComponent,
+    PostTripComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],

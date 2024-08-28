@@ -1,4 +1,4 @@
-import { Driver } from "./user.model";
+import { User } from "./user.model";
 
 export class Trip {
   constructor(
@@ -6,7 +6,7 @@ export class Trip {
     public origin: string,
     public destination: string,
     public startDate: string,
-    public driver: Driver,
+    public driver: User,
     public carPlate: string
   ) { }
 }
