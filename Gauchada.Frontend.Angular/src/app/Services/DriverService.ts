@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../Models/user.model';
+import { ApiResponse } from '../Models/response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +21,9 @@ export class DriverService {
     formData.append('PhoneNumber', user.phoneNumber);
     formData.append('Photo', photo);
     return this._http.post<any>(`${this.driverUrl}`, formData);
+  }
+
+  getDriver(userName: string): Observable<ApiResponse> {
+    return this._http.get<ApiResponse>(`${this.driverUrl}?driverUserName=${userName}`);
   }
 }

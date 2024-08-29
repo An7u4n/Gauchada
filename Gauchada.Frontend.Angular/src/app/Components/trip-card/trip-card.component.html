@@ -3,19 +3,24 @@
     <div class="driver-name">
       <span>Driver:</span>
       <br />
-      <strong>Miguel Angel</strong>
+      <strong>{{ trip.driverUserName }}</strong>
     </div>
-    <div class="driver-photo">Foto<br>usuario</div>
+    <img
+      *ngIf="driver && driver.photoSrc"
+      [src]="driver.photoSrc"
+      alt="Driver Photo"
+      class="driver-photo"
+    />
   </div>
   <div class="trip-info">
     <div class="location">
-      <span class="city">Reconquista</span>
-      <span class="time">09:00</span>
+      <span class="city">{{ trip.origin }}</span>
+      <span class="time">{{ startDay + " " + startHour }}</span>
     </div>
     <div class="arrow">↓</div>
     <div class="location">
-      <span class="city">Santa Fe</span>
-      <span class="time">13:30</span>
+      <span class="city">{{ trip.destination }}</span>
+      <!-- <span class="time">13:30</span> -->
     </div>
   </div>
 </div>

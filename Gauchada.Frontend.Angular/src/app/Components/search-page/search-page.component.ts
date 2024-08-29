@@ -9,6 +9,8 @@ import { TripService } from '../../Services/TripService';
 })
 export class SearchPageComponent {
   searchError: string | null = null;
+  searchSuccess: boolean = false;
+  trips: any[] = [];
   formData = {
     origin: '',
     destination: ''
@@ -19,7 +21,10 @@ export class SearchPageComponent {
     event.preventDefault();
 
     this._tripService.tripSearch(this.formData.origin, this.formData.destination).subscribe(trips => {
-      console.log(trips);
+      if(trips.success == true){
+        this.searchSuccess = true;
+        this.trips = trips.data;
+      }
     }, error => { console.log(error.error.message); this.searchError = error.error.message; });
   }
 }
