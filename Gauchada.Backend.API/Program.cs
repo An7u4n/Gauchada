@@ -48,6 +48,7 @@ namespace Gauchada.Backend.API
                 context.Database.Migrate();
             }
 
+            app.UseStaticFiles();
             app.UseCors();
 
             // Configure the HTTP request pipeline.
