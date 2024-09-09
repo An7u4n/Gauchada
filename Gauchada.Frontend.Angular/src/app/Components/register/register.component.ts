@@ -47,7 +47,7 @@ export class RegisterComponent {
         this._driverService.postDriver(user, this.image).subscribe(returnValue => console.log(returnValue), error => console.error(error));
   
       } else if(this.registerForm.value.userType == 'passenger') {
-        this._passengerService.postDriver(user, this.image).subscribe(returnValue => console.log(returnValue), error => console.error(error));
+        this._passengerService.postPassenger(user, this.image).subscribe(returnValue => console.log(returnValue), error => console.error(error));
       }
     }
     

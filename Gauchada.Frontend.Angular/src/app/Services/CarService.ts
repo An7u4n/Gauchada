@@ -7,10 +7,10 @@ import { ApiResponse } from '../Models/response.model';
   providedIn: 'root'
 })
 export class CarService {
-  tripsUrl = 'http://localhost:5080/api/Cars';
+  carsUrl = 'http://localhost:5080/api/Cars';
   constructor(private _http: HttpClient) { }
 
   getUserCars(userName: string): Observable<ApiResponse> {
-    return this._http.get<ApiResponse>(`${this.tripsUrl}/GetCarsByUserName?userName=${userName}`);
+    return this._http.get<ApiResponse>(`${this.carsUrl}/GetCarsByUserName?userName=${userName}`);
   }
 }

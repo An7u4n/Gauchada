@@ -9,7 +9,19 @@ import { ApiResponse } from '../Models/response.model';
 })
 export class DriverService {
   driverUrl = 'http://localhost:5080/api/Drivers';
+  loggedDriver: User | undefined;
   constructor(private _http: HttpClient) { }
+
+  getDriver(username: string): Observable<ApiResponse> {
+    return this._http.get<ApiResponse>(`${this.driverUrl}?driverUserName=${username}`);
+  }
+
+  getLoggedDriver(): User{
+    let driver = localStorage.getItem('driver');
+    if(driver)
+      return JSON.parse(driver)
+    throw new Error('No driver logged');
+  }
 
   postDriver(user: User, photo: any): Observable<any> {
     const formData = new FormData();
@@ -21,9 +33,5 @@ export class DriverService {
     formData.append('PhoneNumber', user.phoneNumber);
     formData.append('Photo', photo);
     return this._http.post<any>(`${this.driverUrl}`, formData);
-  }
-
-  getDriver(userName: string): Observable<ApiResponse> {
-    return this._http.get<ApiResponse>(`${this.driverUrl}?driverUserName=${userName}`);
   }
 }

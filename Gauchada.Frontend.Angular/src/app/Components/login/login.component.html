@@ -1,17 +1,25 @@
 <div class="login-container">
-    <h1>Login</h1>
-    <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form">
-        <input placeholder="Email" type="text" formControlName="username">
-        <div class="input-switch">
-            <input class="password" placeholder="Password" [type]="show ? 'text' : 'password'" formControlName="password">
-            <button class="btn-show-switch" type="button" (click)="showPassword()">{{show ? 'Show' : 'Hide'}}</button>
-        </div>
-        
-        
-        <div class="btn-container">
-            <button class="primary button" type="submit">Login</button>
-            <button class="button secondary" type="button" (click)="register()">Register</button>
-        </div>
-    </form>
-    
+  <h1>Login</h1>
+  <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form">
+    <input placeholder="Email" type="text" formControlName="username" />
+    <div class="input-switch">
+      <input
+        class="password"
+        placeholder="Password"
+        [type]="show ? 'text' : 'password'"
+        formControlName="password"
+      />
+      <button class="btn-show-switch" type="button" (click)="showPassword()">
+        {{ show ? "Show" : "Hide" }}
+      </button>
+    </div>
+    <p class="error-message">{{ this.errorMessage }}</p>
+
+    <div class="btn-container">
+      <button class="primary button" type="submit">Login</button>
+      <button class="button secondary" type="button" (click)="register()">
+        Register
+      </button>
+    </div>
+  </form>
 </div>

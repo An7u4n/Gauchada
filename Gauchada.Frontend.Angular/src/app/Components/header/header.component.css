@@ -8,7 +8,52 @@ nav{
   padding: 0 5%;
 }
 
-a {
+ul{
+  text-decoration: none;
+}
+
+a,ul li {
   font-weight: bold;
   color: #42B0FF;
+  list-style: none;
+  cursor: pointer;
+}
+
+nav ul {
+  list-style-type: none;
+  width: 120px;
+}
+
+nav ul .dropdown {
+  position: relative;
+  cursor: pointer;
+}
+
+nav ul .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: none;
+  background-color: white;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #ccc;
+}
+
+nav ul .dropdown-menu li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+nav ul .dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+nav ul .dropdown-menu li:hover {
+  background-color: #f0f0f0;
+}
+
+.logout{
+  color: #ff0d00 !important;
 }

@@ -79,3 +79,11 @@ input:focus {
     align-items: center;
 
 }
+
+.error-message{
+    color: red;
+    font-size: 12px;
+    font-weight: bold;
+    position: absolute;
+    bottom: 190px;
+}

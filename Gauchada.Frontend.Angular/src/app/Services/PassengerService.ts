@@ -10,7 +10,12 @@ export class PassengerService {
   passengerUrl = 'http://localhost:5080/api/Passengers';
   constructor(private _http: HttpClient) { }
 
-  postDriver(user: User, photo: any): Observable<any> {
+  getLoggedPassenger(): User | undefined {
+    let passenger = JSON.parse(localStorage.getItem('passenger') ?? '');
+    return passenger;
+  }
+
+  postPassenger(user: User, photo: any): Observable<any> {
     const formData = new FormData();
     formData.append('UserName', user.userName);
     formData.append('Name', user.name);

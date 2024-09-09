@@ -1,4 +1,16 @@
 <nav>
-  <a><h2>Gauchada</h2></a>
-  <a>Username</a>
+  <a (click)="onLogoClick()"><h2>Gauchada</h2></a>
+  <ul
+    (mouseenter)="toggleDropdown()"
+    (mouseleave)="toggleDropdown()"
+    class="profile"
+  >
+    <li class="dropdown">
+      <a>{{ this.user.userName }}</a>
+      <ul *ngIf="isDropdownOpen" class="dropdown-menu">
+        <li (click)="onTripCreate()">Create a Trip</li>
+        <li class="logout" (click)="onLogout()">Logout</li>
+      </ul>
+    </li>
+  </ul>
 </nav>

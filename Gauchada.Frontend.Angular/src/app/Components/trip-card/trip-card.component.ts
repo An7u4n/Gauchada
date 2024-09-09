@@ -24,7 +24,6 @@ export class TripCardComponent implements OnInit {
       {
         this.driver = responseMessage.data;
         if(this.driver != undefined) this.driver.photoSrc = 'http://localhost:5080/images/driver/' + this.driver.photoSrc;
-        console.log(responseMessage);
       }
       , error => console.error(error));
   }
