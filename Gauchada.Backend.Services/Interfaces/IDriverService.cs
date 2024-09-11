@@ -11,5 +11,6 @@ namespace Gauchada.Backend.Services.Interfaces
     {
         public Task<UserDTO?> GetDriverByUserName(string userName);
         public Task AddDriver(AddUserDTO driver);
+        public Task<List<TripDTO>?> GetDriverTrips(string userName);
     }
 }

@@ -15,12 +15,26 @@ namespace Gauchada.Backend.API.Controllers
             _tripService = tripService;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<ControllerResponse>> GetTripsByLocations(string origin, string destination)
+        [HttpGet("ExactDate")]
+        public async Task<ActionResult<ControllerResponse>> GetTripsByExactDate(string origin, string destination, DateTime date)
         {
             try
             {
-                var trips = await _tripService.GetTripsByLocation(origin, destination);
+                var trips = await _tripService.GetTripsByExactDate(origin, destination, date);
+                return Ok(ControllerResponse.SuccessResponse(trips, "Trips Found"));
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ControllerResponse.FailureResponse(ex.Message));
+            }
+        }
+
+        [HttpGet("DateRange")]
+        public async Task<ActionResult<ControllerResponse>> GetTripsByDateRange(string origin, string destination, DateTime minDate, DateTime maxDate)
+        {
+            try
+            {
+                var trips = await _tripService.GetTripsByDateRange(origin, destination, minDate, maxDate);
                 return Ok(ControllerResponse.SuccessResponse(trips, "Trips Found"));
             }
             catch (Exception ex)

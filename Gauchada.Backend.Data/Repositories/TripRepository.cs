@@ -31,11 +31,11 @@ namespace Gauchada.Backend.Data.Repositories
             }
         }
 
-        public async Task<List<TripEntity>?> GetTripsByLocations(string origin, string destination)
+        public async Task<List<TripEntity>?> GetTripsByDateRange(string origin, string destination, DateTime minDate, DateTime maxDate)
         {
             try
             {
-                return await _context.Trips.Where(t => t.Origin == origin && t.Destination == destination && t.StartDate > DateTime.Now).ToListAsync();
+                return await _context.Trips.Where(t => t.Origin == origin && t.Destination == destination && t.StartDate >= minDate && t.StartDate <= maxDate).ToListAsync();
             }
             catch (SqlException ex)
             {
@@ -145,6 +145,8 @@ namespace Gauchada.Backend.Data.Repositories
             try
             {
                 var trip = await _context.Trips.Include(t => t.Passengers).FirstOrDefaultAsync(t => t.TripId == tripId);
+                if (trip == null)
+                    throw new Exception("Trip doesnt found");
                 return trip.Passengers.ToList();
             }
             catch (SqlException ex)
@@ -157,11 +159,11 @@ namespace Gauchada.Backend.Data.Repositories
             }
         }
 
-        public async Task<List<TripEntity>?> GetTripsByLocationsAndDate(string origin, string destination, DateTime startDate)
+        public async Task<List<TripEntity>?> GetTripsByExactDate(string origin, string destination, DateTime date)
         {
             try
             {
-                return await _context.Trips.Include(t => t.Car).Include(t => t.Driver).Where(t => t.Origin == origin && t.Destination == destination && t.StartDate.Date == startDate.Date).ToListAsync();
+                return await _context.Trips.Include(t => t.Car).Include(t => t.Driver).Where(t => t.Origin == origin && t.Destination == destination && t.StartDate.Date == date).ToListAsync();
             }
             catch (SqlException ex)
             {

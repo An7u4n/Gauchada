@@ -16,6 +16,21 @@ namespace Gauchada.Backend.API.Controllers
             _driverService = driverService;
         }
 
+        [HttpGet("GetDriverTrips")]
+        public async Task<ActionResult<ControllerResponse>> GetDriverTrips(string userName)
+        {
+            try
+            {
+                var drivers = await _driverService.GetDriverTrips(userName);
+                return Ok(ControllerResponse.SuccessResponse(drivers, "Trips Found"));
+
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ControllerResponse.FailureResponse(ex.Message));
+            }
+        }
+
         [HttpGet]
         public async Task<ActionResult<ControllerResponse>> GetDriverByUserName(string driverUserName)
         {

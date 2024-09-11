@@ -52,5 +52,24 @@ namespace Gauchada.Backend.Services
                throw new Exception(ex.Message);
             }
         }
+
+        public async Task<List<TripDTO>?> GetDriverTrips(string userName)
+        {
+            try
+            {
+                var driverTrips = await _driverRepository.GetDriverTrips(userName);
+                if(driverTrips ==  null)
+                    throw new Exception("Driver has no trips");
+                return driverTrips.Aggregate(new List<TripDTO>(), (acc, trip) =>
+                {
+                    acc.Add(new TripDTO(trip));
+                    return acc;
+                });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

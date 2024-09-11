@@ -6,5 +6,6 @@ namespace Gauchada.Backend.Data.Repositories.Interfaces
     {
         Task AddDriver(DriverEntity driver);
         Task<DriverEntity?> GetDriverByUserName(string driverUserName);
+        Task<List<TripEntity>?> GetDriverTrips(string driverUserName);
     }
 }

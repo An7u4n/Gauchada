@@ -2,6 +2,7 @@
 using Gauchada.Backend.Model.DTO;
 using Gauchada.Backend.Model.Entity;
 using Gauchada.Backend.Services.Interfaces;
+using Gauchada.Backend.Services.Tools;
 
 namespace Gauchada.Backend.Services
 {
@@ -18,7 +19,7 @@ namespace Gauchada.Backend.Services
             throw new NotImplementedException();
         }
 
-        public async Task<CarDTO> GetCarByPlate(string carPlate)
+        public async Task<CarDTO?> GetCarByPlate(string carPlate)
         {
             try
             {
@@ -71,9 +72,9 @@ namespace Gauchada.Backend.Services
             {
                 var newCar = new CarEntity
                 {
-                    CarPlate = car.CarPlate,
-                    Brand = car.Brand,
-                    Model = car.Model,
+                    CarPlate = StringTools.ToUppercase(car.CarPlate),
+                    Brand = StringTools.ToCapitalizedCase(car.Brand),
+                    Model = StringTools.ToCapitalizedCase(car.Model),
                     Color = car.Color,
                     OwnerUserName = car.OwnerUserName,
                     MaxPassengers = car.MaxPassengers

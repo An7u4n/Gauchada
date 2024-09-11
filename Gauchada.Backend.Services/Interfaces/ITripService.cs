@@ -9,7 +9,8 @@ namespace Gauchada.Backend.Services.Interfaces
 {
     public interface ITripService
     {
-        Task<List<TripDTO>> GetTripsByLocation(string origin, string destination);
+        Task<List<TripDTO>> GetTripsByExactDate(string origin, string destination, DateTime date);
+        Task<List<TripDTO>> GetTripsByDateRange(string origin, string destination, DateTime minDate, DateTime maxDate);
         Task<List<UserDTO>> GetTripPassengers(int tripId);
         Task<List<TripDTO>> GetUserTrips(string passengerUserName);
         Task<bool> SetTrip(TripDTO trip);

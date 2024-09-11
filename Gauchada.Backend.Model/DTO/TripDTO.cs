@@ -15,6 +15,15 @@ namespace Gauchada.Backend.Model.DTO
         public DateTime StartDate { get; set; }
         public string DriverUserName { get; set; }
         public string CarPlate { get; set; }
+        public TripDTO() { }
+        public TripDTO(TripEntity trip)
+        {
+            Origin = trip.Origin;
+            Destination = trip.Destination;
+            StartDate = trip.StartDate;
+            DriverUserName = trip.DriverUserName;
+            CarPlate = trip.CarPlate;
+        }
     }
     public class TripGetDTO {
         public int TripId { get; set; }

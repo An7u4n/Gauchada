@@ -1,6 +1,7 @@
 ﻿using Gauchada.Backend.Data.Repositories.Interfaces;
 using Gauchada.Backend.Model.Entity;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,23 @@ namespace Gauchada.Backend.Data.Repositories
             try
             {
                 return await _context.Drivers.FindAsync(driverUserName);
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("DB Error: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Unknow Error In Repository: " + ex.Message);
+            }
+        }
+
+        public async Task<List<TripEntity>?> GetDriverTrips(string driverUserName)
+        {
+            try
+            {
+                var driver = await _context.Drivers.Include(d => d.Trips).FirstOrDefaultAsync(d => d.UserName == driverUserName);
+                return driver?.Trips.ToList();
             }
             catch (SqlException ex)
             {

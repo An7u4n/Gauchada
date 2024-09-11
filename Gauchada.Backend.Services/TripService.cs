@@ -3,6 +3,7 @@ using Gauchada.Backend.Data.Repositories.Interfaces;
 using Gauchada.Backend.Model.DTO;
 using Gauchada.Backend.Model.Entity;
 using Gauchada.Backend.Services.Interfaces;
+using Gauchada.Backend.Services.Tools;
 
 namespace Gauchada.Backend.Services
 {
@@ -21,14 +22,47 @@ namespace Gauchada.Backend.Services
             _passengerRepository = passengerRepository;
         }
 
-        public async Task<List<TripDTO>> GetTripsByLocation(string origin, string destination)
+        public async Task<List<TripDTO>> GetTripsByExactDate(string origin, string destination, DateTime date)
         {
             try
             {
-                var trips = await _tripRepository.GetTripsByLocations(origin, destination);
+                if (date < DateTime.Now)
+                    throw new Exception("Date can't be in the past");
+                var trips = await _tripRepository.GetTripsByExactDate(origin, destination, date);
 
                 if (trips == null || trips.Count == 0)
                     throw new Exception($"No trips found between {origin} and {destination}");
+
+                return trips.Select(t => new TripDTO
+                {
+                    TripId = t.TripId,
+                    Origin = t.Origin,
+                    Destination = t.Destination,
+                    StartDate = t.StartDate,
+                    DriverUserName = t.DriverUserName,
+                    CarPlate = t.CarPlate
+                }).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<List<TripDTO>> GetTripsByDateRange(string origin, string destination, DateTime minDate, DateTime maxDate)
+        {
+            try
+            {
+                if (minDate < DateTime.Now)
+                    throw new Exception("Date can't be in the past");
+
+                if (maxDate < minDate)
+                    throw new Exception("Max date cant be earlier than min date");
+
+                var trips = await _tripRepository.GetTripsByDateRange(origin, destination, minDate, maxDate);
+
+                if (trips == null || trips.Count == 0)
+                    throw new Exception($"No trips found between {origin} and {destination} with explicited dates");
 
                 return trips.Select(t => new TripDTO
                 {
@@ -145,8 +179,8 @@ namespace Gauchada.Backend.Services
             
                 var tripEntity = new TripEntity
                 {
-                    Origin = trip.Origin,
-                    Destination = trip.Destination,
+                    Origin = StringTools.ToCapitalizedCase(trip.Origin),
+                    Destination = StringTools.ToCapitalizedCase(trip.Destination),
                     StartDate = trip.StartDate,
                     DriverUserName = trip.DriverUserName,
                     CarPlate = trip.CarPlate,
