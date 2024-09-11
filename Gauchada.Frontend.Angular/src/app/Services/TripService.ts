@@ -10,8 +10,12 @@ export class TripService {
   tripsUrl = 'http://localhost:5080/api/Trips';
   constructor(private _http: HttpClient) { }
 
-  tripSearch(origin: string, destination: string): Observable<ApiResponse> {
-    return this._http.get<ApiResponse>(`${this.tripsUrl}?origin=${origin}&destination=${destination}`);
+  getUserTrips(username: string) : Observable<ApiResponse> {
+    return this._http.get<ApiResponse>(`${this.tripsUrl}/GetUserTrips?userName=${username}`);
+  }
+
+  tripSearch(origin: string, destination: string, date: any): Observable<ApiResponse> {
+    return this._http.get<ApiResponse>(`${this.tripsUrl}/ExactDate?origin=${origin}&destination=${destination}&date=${date}`);
   }
 
   postTrip(origin: string, destination: string, date: string, user: string, plate: string): Observable<ApiResponse> {

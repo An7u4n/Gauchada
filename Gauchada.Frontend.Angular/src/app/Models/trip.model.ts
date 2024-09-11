@@ -6,7 +6,7 @@ export class Trip {
     public origin: string,
     public destination: string,
     public startDate: string,
-    public driver: User,
+    public driverUserName: string,
     public carPlate: string
   ) { }
 }

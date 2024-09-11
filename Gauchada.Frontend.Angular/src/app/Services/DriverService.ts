@@ -16,11 +16,14 @@ export class DriverService {
     return this._http.get<ApiResponse>(`${this.driverUrl}?driverUserName=${username}`);
   }
 
-  getLoggedDriver(): User{
+  getLoggedDriver(): User | null{
     let driver = localStorage.getItem('driver');
-    if(driver)
-      return JSON.parse(driver)
-    throw new Error('No driver logged');
+    if(driver) return JSON.parse(driver)
+      return null;
+  }
+
+  getDriverTrips(username: string): Observable<ApiResponse> {
+      return this._http.get<ApiResponse>(`${this.driverUrl}/GetDriverTrips?userName=${username}`);
   }
 
   postDriver(user: User, photo: any): Observable<any> {

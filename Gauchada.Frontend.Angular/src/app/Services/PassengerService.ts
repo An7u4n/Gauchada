@@ -10,9 +10,11 @@ export class PassengerService {
   passengerUrl = 'http://localhost:5080/api/Passengers';
   constructor(private _http: HttpClient) { }
 
-  getLoggedPassenger(): User | undefined {
-    let passenger = JSON.parse(localStorage.getItem('passenger') ?? '');
-    return passenger;
+  getLoggedPassenger(): User | null {
+    let passenger = localStorage.getItem('passenger');
+    if(passenger)
+      return JSON.parse(passenger);
+    return null;
   }
 
   postPassenger(user: User, photo: any): Observable<any> {

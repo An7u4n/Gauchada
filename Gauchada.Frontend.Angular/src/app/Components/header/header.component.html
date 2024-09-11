@@ -6,9 +6,10 @@
     class="profile"
   >
     <li class="dropdown">
-      <a>{{ this.user.userName }}</a>
+      <a (click)="onProfileClick()">{{ this.user.userName }}</a>
       <ul *ngIf="isDropdownOpen" class="dropdown-menu">
-        <li (click)="onTripCreate()">Create a Trip</li>
+        <li (click)="onTripCreate()" *ngIf="isDriver">Create a Trip</li>
+        <li (click)="onTripSearch()">Search a Trip</li>
         <li class="logout" (click)="onLogout()">Logout</li>
       </ul>
     </li>

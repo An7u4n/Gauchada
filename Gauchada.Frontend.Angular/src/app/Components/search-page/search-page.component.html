@@ -1,11 +1,11 @@
 <div class="container">
   <app-header></app-header>
   <h2>Search a Trip</h2>
-  <form (ngSubmit)="searchTrips($event)">
+  <form (ngSubmit)="searchTrips($event, tripDay)">
     <div class="text-container">
       <div class="input-container">
         <p>Date</p>
-        <calendar-date>
+        <calendar-date #tripDay>
           <svg
             aria-label="Previous"
             slot="previous"

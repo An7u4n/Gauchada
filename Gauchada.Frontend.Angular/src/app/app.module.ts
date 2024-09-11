@@ -13,6 +13,8 @@ import { FormsModule } from '@angular/forms';
 import "cally";
 import { RegisterComponent } from './Components/register/register.component';
 import { PostTripComponent } from './Components/post-trip/post-trip.component';
+import { AddCarComponent } from './Components/add-car/add-car.component';
+import { ProfileDashboardComponent } from './Components/profile-dashboard/profile-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { PostTripComponent } from './Components/post-trip/post-trip.component';
     SearchPageComponent,
     HeaderComponent,
     PostTripComponent,
+    AddCarComponent,
+    ProfileDashboardComponent
   ],
   imports: [
     BrowserModule,

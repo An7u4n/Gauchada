@@ -13,6 +13,15 @@
         {{ show ? "Show" : "Hide" }}
       </button>
     </div>
+    <div class="user-type-container">
+      UserType:
+      <span class="user-type-buttons">
+        <input type="radio" formControlName="userType" value="passenger" />
+        Passenger
+        <input type="radio" formControlName="userType" value="driver" />
+        Driver
+      </span>
+    </div>
     <p class="error-message">{{ this.errorMessage }}</p>
 
     <div class="btn-container">

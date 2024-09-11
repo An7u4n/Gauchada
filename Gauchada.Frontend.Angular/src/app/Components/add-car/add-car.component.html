@@ -1,0 +1,60 @@
+<div class="container">
+  <app-header></app-header>
+
+  <form (ngSubmit)="postCar($event)">
+    <div class="input-container">
+      <label for="plate">Car Plate</label>
+      <input
+        placeholder="AA000AA"
+        type="text"
+        name="plate"
+        [(ngModel)]="formData.plate"
+      />
+
+      <label for="brand">Brand</label>
+      <input
+        placeholder="Toyota"
+        type="text"
+        [(ngModel)]="formData.brand"
+        name="brand"
+      />
+
+      <label for="model">Model</label>
+      <input
+        placeholder="Corolla"
+        type="text"
+        [(ngModel)]="formData.model"
+        name="model"
+      />
+
+      <div class="semi-row">
+        <label for="year" class="semi-row-label">Year</label>
+        <input
+          placeholder="2024"
+          type="number"
+          [(ngModel)]="formData.year"
+          name="year"
+        />
+        <label for="maxPassengers">Car Sits</label>
+        <input
+          placeholder="5"
+          type="number"
+          [(ngModel)]="formData.maxPassengers"
+          name="maxPassengers"
+        />
+      </div>
+
+      <label for="color">Color</label>
+      <input
+        placeholder="White"
+        type="text"
+        [(ngModel)]="formData.color"
+        name="color"
+      />
+      <span class="post-exception-message" *ngIf="postError">
+        {{ postError }}
+      </span>
+      <button class="primary button" type="submit">Save Car</button>
+    </div>
+  </form>
+</div>

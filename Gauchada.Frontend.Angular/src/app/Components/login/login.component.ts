@@ -16,7 +16,8 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router, private _loginService: UserService) { }
   loginForm= new FormGroup({
       username:new FormControl(''),
-      password:new FormControl('')
+      password:new FormControl(''),
+      userType:new FormControl('')
     }
   );
   show = false;
@@ -30,8 +31,10 @@ export class LoginComponent implements OnInit {
   login() {
     let username = this.loginForm.value.username;
     let password = this.loginForm.value.password;
+    let userType = this.loginForm.value.userType;
   
-    if (username != undefined && password != undefined && username.length > 0) {
+    if (username != undefined && password != undefined && userType != undefined && username.length > 0 && userType.length > 0) {
+      if(userType == 'driver'){
       this._loginService.loginDriver(username, password).subscribe(isLoggedIn => {
         if (!isLoggedIn) {
           this.errorMessage = 'User or password wrong';
@@ -39,6 +42,15 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/trips']);
         }
       });
+    } else {
+      this._loginService.loginPassenger(username, password).subscribe(isLoggedIn => {
+        if (!isLoggedIn) {
+          this.errorMessage = 'User or password wrong';
+        } else {
+          this.router.navigate(['/trips']);
+        }
+      });
+    }
     } else {
       this.errorMessage = 'Please fill all the fields';
     }

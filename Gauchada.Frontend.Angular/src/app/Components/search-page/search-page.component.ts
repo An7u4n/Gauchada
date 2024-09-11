@@ -17,14 +17,27 @@ export class SearchPageComponent {
   }
   constructor(private _tripService: TripService) { }
 
-  searchTrips(event: Event) {
+  searchTrips(event: Event, tripDay: any) {
+    this.searchError = '';
     event.preventDefault();
+    if(this.checkErrors(tripDay)){
+      this._tripService.tripSearch(this.formData.origin, this.formData.destination, tripDay.value).subscribe(trips => {
+        if(trips.success == true){
+          this.searchSuccess = true;
+          this.trips = trips.data;
+        }
+      }, error => { console.log(error.error.message); this.searchError = 'No trips found between'+this.formData.origin+' and '+this.formData.destination+' on '+tripDay.value; });
+    }
+  }
 
-    this._tripService.tripSearch(this.formData.origin, this.formData.destination).subscribe(trips => {
-      if(trips.success == true){
-        this.searchSuccess = true;
-        this.trips = trips.data;
-      }
-    }, error => { console.log(error.error.message); this.searchError = error.error.message; });
+  checkErrors(tripDay: any) : boolean{
+    if(this.formData.origin == '' || this.formData.destination == '' || tripDay.value == ''){
+      this.searchError = 'Please fill all the fields';
+      return false;
+    } else if(new Date(tripDay.value) < new Date){
+      this.searchError = 'Please select a valid date';
+      return false;
+    }
+    return true;
   }
 }

@@ -1,0 +1,59 @@
+<div class="container">
+  <app-header></app-header>
+  <p class="title">{{ this.user.userName }} Profile</p>
+  <p class="subtitle" (click)="onMyTrips()" *ngIf="hasTrips">
+    My Trips<span>&darr;</span>
+  </p>
+  <table class="car-table" *ngIf="myTrips">
+    <thead>
+      <tr>
+        <th>StartDate</th>
+        <th>Origin</th>
+        <th>Destination</th>
+        <th>Driver</th>
+        <th>Travel Car Plate</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let trip of trips">
+        <td>{{ trip.startDate }}</td>
+        <td>{{ trip.origin }}</td>
+        <td>{{ trip.destination }}</td>
+        <td>{{ trip.driverUserName }}</td>
+        <td>{{ trip.carPlate }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="informative-message" *ngIf="!hasTrips">
+    No trips yet. Start your journey today!
+  </p>
+
+  <p class="subtitle" (click)="onMyCars()" *ngIf="isDriver">
+    My Cars<span>&darr;</span>
+  </p>
+  <table class="car-table" *ngIf="myCars">
+    <thead>
+      <tr>
+        <th>Plate</th>
+        <th>Brand</th>
+        <th>Model</th>
+        <th>Color</th>
+        <th>Max Passengers</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let car of cars">
+        <td>{{ car.carPlate }}</td>
+        <td>{{ car.brand }}</td>
+        <td>{{ car.model }}</td>
+        <td>{{ car.color }}</td>
+        <td>{{ car.maxPassengers }}</td>
+        <td>
+          <button (click)="updateCar(car)">Update</button>
+          <button (click)="deleteCar(car)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

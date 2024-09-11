@@ -28,6 +28,19 @@ export class UserService {
     );
   }
 
+  loginPassenger(username: string, password: string): Observable<boolean> {
+    return this._http.get<ApiResponse>(`${this.passengersUrl}?passengerUserName=${username}`).pipe(
+      map(res => {
+        if (res.success && res.data) {
+          localStorage.setItem('passenger', JSON.stringify(res.data));
+          return true;
+        } else {
+          return false;
+        }
+      })
+    );
+  }
+
   isLogged(): boolean {
     if(localStorage.getItem('driver') == null && localStorage.getItem('passenger') == null)
       return false;
@@ -36,11 +49,21 @@ export class UserService {
 
   getLoggedUser(): User{
     let driver = this._driverService.getLoggedDriver();
-    if(driver)
+    if(driver){
+      localStorage.setItem('userType', 'driver');
       return driver;
+    }
     let passenger = this._passengerService.getLoggedPassenger();
-    if(passenger)
-    return passenger;
+    if(passenger){
+      localStorage.setItem('userType', 'passenger');
+      return passenger;
+    }
+    throw new Error('No user logged');
+  }
+  getLoggedUserType(): string{
+    let userType = localStorage.getItem('userType');
+    if(userType)
+      return userType;
     throw new Error('No user logged');
   }
 

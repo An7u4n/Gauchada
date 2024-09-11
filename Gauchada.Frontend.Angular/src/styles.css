@@ -1,9 +1,36 @@
-/* You can add global styles to this file, and also import other style files */
+
 .body {
     font-family: Poppins,sans-serif;
 }
 *{
     font-family: Poppins;
+}
+
+input[type="number"]::-webkit-inner-spin-button, 
+input[type="number"]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}
+
+/* Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.title {
+    margin-left: 5%;
+    font-size: 32px;
+    margin-bottom: 0;
+    color: black;
+    font-weight: bold;
+}
+
+.subtitle {
+    margin-left: 5%;
+    font-size: 28px;
+    margin-top: 30px;
+    color: #42B0FF;
+    font-weight: bold;
 }
 
 .button {
@@ -36,4 +63,17 @@
 
 .button.secondary:hover {
     background-color: rgba(66, 176, 255, 0.1); 
+}
+
+.informative-message{
+    color: #42B0FF;
+    font-weight: 600;
+    margin-top: 2.5vh;
+    align-self: center;
+}
+
+.post-exception-message {
+    color: #b43333;
+    font-weight: 600;
+    margin-top: 0.5vh;
 }

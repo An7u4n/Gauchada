@@ -1,0 +1,46 @@
+.container {
+    width: 550px;
+    height: 790px;
+    background-color: white;
+    box-shadow: 0px 10px 20px rgba(0,0,0,0.3);
+}
+
+.input-container{
+    display: flex;
+    flex-direction: column;
+    margin-top: 5%;
+    padding: 20px;
+}
+
+input {
+    color: #000000;
+    margin-bottom: 8%;
+    border: .5px solid rgb(194, 194, 194);
+    background-color: transparent;
+    height: 30px;
+    padding: 10px;
+    width: 70%;
+    transform: scale(1);
+    transition: 0.3s;
+    align-self: center;
+    text-transform: uppercase;
+}
+
+.semi-row{
+    width: 70%;
+    display: block;
+    padding: 10px;
+    align-self: center;
+}
+
+.semi-row input{
+    width: 15%;
+}
+
+label {
+    margin-left: 15%;
+}
+
+.semi-row label {
+    margin: 0 5% 0 5%;
+}
