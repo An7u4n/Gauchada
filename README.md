@@ -1,6 +1,6 @@
 # Gauchada Travel App
 
-**Gauchada** is an end-to-end application designed to connect passengers with private car drivers for ride-sharing. It follows a traditional three-layer architecture, utilizing Angular for the user interface, .NET with C# in the service layer, and SQL Server for data persistence. Secured via JWT (JSON Web Tokens) using Bearer Tokens.
+**Gauchada** is an end-to-end application designed to connect passengers with private car drivers for ride-sharing. It follows a traditional three-layer architecture, utilizing Angular for the user interface, .NET with C# in the service layer, and SQL Server for data persistence.
 
 The app uses Entity Framework as ORM, its secured via JWT (JSON Web Tokens) using Bearer Tokens and xUnit for api Tests.
 User images are stored in a dedicated folder on the server, and their paths are saved in the database.
