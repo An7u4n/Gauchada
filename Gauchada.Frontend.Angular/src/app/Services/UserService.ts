@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { map, Observable, switchMap } from 'rxjs';
 import { ApiResponse } from '../Models/response.model';
 import { DriverService } from './DriverService';
 import { PassengerService } from './PassengerService';
@@ -14,9 +14,16 @@ export class UserService {
   passengersUrl = 'http://localhost:5080/api/Passengers';
   constructor(private _http: HttpClient, private _driverService: DriverService, private _passengerService: PassengerService) { }
 
-  // Authentication to be added
   loginDriver(username: string, password: string): Observable<boolean> {
-    return this._http.get<ApiResponse>(`${this.driverUrl}?driverUserName=${username}`).pipe(
+    return this._http.post<ApiResponse>(`http://localhost:5080/api/UserLogin/Driver?username=${username}&password=${password}`, {})
+    .pipe(
+      map(res => {
+        localStorage.setItem('token', res.data);
+        return res.data;
+      }),
+      switchMap(token => {
+        return this._http.get<ApiResponse>(`${this.driverUrl}?driverUserName=${username}`);
+      }),
       map(res => {
         if (res.success && res.data) {
           localStorage.setItem('driver', JSON.stringify(res.data));
@@ -66,6 +73,8 @@ export class UserService {
       return userType;
     throw new Error('No user logged');
   }
+
+
 
   logout(){
     localStorage.removeItem('driver');

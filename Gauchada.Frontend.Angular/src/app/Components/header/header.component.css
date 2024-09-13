@@ -48,6 +48,7 @@ nav ul .dropdown-menu li {
 
 nav ul .dropdown:hover .dropdown-menu {
   display: block;
+  z-index: 999;
 }
 
 nav ul .dropdown-menu li:hover {

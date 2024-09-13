@@ -14,6 +14,14 @@ export class TripService {
     return this._http.get<ApiResponse>(`${this.tripsUrl}/GetUserTrips?userName=${username}`);
   }
 
+  getTripPassengers(tripId: number) : Observable<ApiResponse> {
+    return this._http.get<ApiResponse>(`${this.tripsUrl}/GetTripPassengers?tripId=${tripId}`);
+  }
+
+  addPassengerToATrip(tripId: number, userName: string) : Observable<ApiResponse> {
+    return this._http.post<ApiResponse>(`${this.tripsUrl}/AddPassengerToATrip?tripId=${tripId}&passengerUserName=${userName}`, null);
+  }
+
   tripSearch(origin: string, destination: string, date: any): Observable<ApiResponse> {
     return this._http.get<ApiResponse>(`${this.tripsUrl}/ExactDate?origin=${origin}&destination=${destination}&date=${date}`);
   }

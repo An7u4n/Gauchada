@@ -33,6 +33,10 @@ export class HeaderComponent {
     this.router.navigate(['/add-trip']);
   }
 
+  onAddCar(){
+    this.router.navigate(['/add-car']);
+  }
+
   onLogoClick(){
     this.router.navigate(['/trips']);
   }

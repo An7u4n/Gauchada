@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" (click)="onTripClick()">
   <div class="driver-info">
     <div class="driver-name">
       <span>Driver:</span>
@@ -23,4 +23,10 @@
       <!-- <span class="time">13:30</span> -->
     </div>
   </div>
+
+  <app-trip-card-popup
+    *ngIf="this.tripPopup"
+    [trip]="this.trip"
+    [driver]="this.driver"
+  ></app-trip-card-popup>
 </div>

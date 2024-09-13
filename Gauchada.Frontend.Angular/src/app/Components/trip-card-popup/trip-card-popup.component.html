@@ -1,0 +1,48 @@
+<div class="card">
+  <div class="card-info">
+    <div class="trip-info-container">
+      <div class="trip-info">
+        <div class="driver-info">
+          <div class="driver-name">
+            <span>Driver:</span>
+            <br />
+            <strong>{{ trip.driverUserName }}</strong>
+          </div>
+          <img
+            *ngIf="driver && driver.photoSrc"
+            [src]="driver.photoSrc"
+            alt="Driver Photo"
+            class="driver-photo"
+          />
+        </div>
+        <div class="trip-schedule">
+          <div class="location">
+            <span class="city">{{ trip.origin }}</span>
+            <span class="time">{{ startDay + " " + startHour }}</span>
+          </div>
+          <div class="arrow">↓</div>
+          <div class="location">
+            <span class="city">{{ trip.destination }}</span>
+            <!-- <span class="time">13:30</span> -->
+          </div>
+        </div>
+      </div>
+      <button class="primary button" (click)="onTripSign()">Sign Me Up!</button>
+    </div>
+    <div class="card-footer">
+      <p class="subtitle">Passengers</p>
+      <p *ngFor="let passenger of passengers" class="passengers-description">
+        <strong>{{ passenger.userName }}</strong>
+        <img
+          [src]="passenger.photoSrc"
+          class="passenger-image"
+          [alt]="passenger.userName"
+        />
+      </p>
+      <strong *ngIf="passengers.length < 1"
+        >No passengers yet. <br />
+        Be the First!!</strong
+      >
+    </div>
+  </div>
+</div>

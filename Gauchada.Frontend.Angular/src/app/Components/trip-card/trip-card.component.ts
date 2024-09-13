@@ -13,6 +13,7 @@ export class TripCardComponent implements OnInit {
   driver: User | undefined;
   startDay: string = '';
   startHour: string = '';
+  tripPopup: boolean = false;
 
   ngOnInit(): void {
     let date = new Date(this.trip.startDate);
@@ -27,4 +28,9 @@ export class TripCardComponent implements OnInit {
       }
       , error => console.error(error));
   }
+
+  onTripClick() {
+    this.tripPopup = true;
+  }
+
 }
