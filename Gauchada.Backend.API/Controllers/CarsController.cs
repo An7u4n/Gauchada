@@ -1,10 +1,12 @@
 ﻿using Gauchada.Backend.Model.DTO;
 using Gauchada.Backend.Model.Response;
 using Gauchada.Backend.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Gauchada.Backend.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CarsController : ControllerBase

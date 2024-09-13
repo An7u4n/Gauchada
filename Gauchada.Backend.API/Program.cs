@@ -3,7 +3,10 @@ using Gauchada.Backend.Data.Repositories;
 using Gauchada.Backend.Data.Repositories.Interfaces;
 using Gauchada.Backend.Services;
 using Gauchada.Backend.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Gauchada.Backend.API
 {
@@ -13,8 +16,26 @@ namespace Gauchada.Backend.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = "gauchadaapi",
+                    ValidAudience = "angularwebapp",
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("notasecretatallbutatallilovecrombiewithlove"))
+                };
+            });
 
+            // Add services to the container.
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -28,6 +49,7 @@ namespace Gauchada.Backend.API
             builder.Services.AddScoped<ICarService, CarService>();
             builder.Services.AddScoped<ITripRepository, TripRepository>();
             builder.Services.AddScoped<ITripService, TripService>();
+            builder.Services.AddScoped<ILoginService, LoginService>();
             builder.Services.AddTransient<IFileStorageService, FileStorageService>();
             builder.Services.AddCors(options =>
             {

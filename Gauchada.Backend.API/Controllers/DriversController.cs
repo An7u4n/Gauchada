@@ -2,9 +2,11 @@
 using Gauchada.Backend.Services.Interfaces;
 using Gauchada.Backend.Model.DTO;
 using Gauchada.Backend.Model.Response;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Gauchada.Backend.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class DriversController : ControllerBase

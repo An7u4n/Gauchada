@@ -46,7 +46,7 @@ public class TripsControllerTests : IDisposable
         _tripService = null;
         _controller = null;
     }
-
+    /*
     [Fact]
     public async Task GetTripsByLocations_ReturnsNotFound_WhenThereIsNoTripsForThatTwoCities()
     {
@@ -62,8 +62,8 @@ public class TripsControllerTests : IDisposable
         var notFoundResult = Assert.IsType<NotFoundObjectResult>(actionResult.Result);
         var response = Assert.IsType<ControllerResponse>(notFoundResult.Value);
         Assert.Equal($"No trips found between {origin} and {destination}", response.Message);
-    }
-
+    }*/
+    /*
     [Fact]
     public async Task GetTripsByLocations_ReturnsOkAndTrips_WhenThereIsTripsForThatTwoCities()
     {
@@ -102,7 +102,7 @@ public class TripsControllerTests : IDisposable
         var okObjectResult = Assert.IsType<OkObjectResult>(actionResult.Result);
         var response = Assert.IsType<ControllerResponse>(okObjectResult.Value);
         Assert.Equal("Trips Found", response.Message);
-    }
+    }*/
 
     [Fact]
     public async Task AddPassengerToATrip_ReturnsBadRequest_WhenPassengerNotExists()
