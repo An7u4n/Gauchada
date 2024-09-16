@@ -7,6 +7,7 @@ namespace Gauchada.Backend.Model.Entity
     {
 
         public ICollection<TripEntity> Trips = new List<TripEntity>();
+        public ICollection<Message> Messages { get; set; }
 
         public PassengerEntity() { }
         public PassengerEntity(AddUserDTO passenger, string photoSrc)

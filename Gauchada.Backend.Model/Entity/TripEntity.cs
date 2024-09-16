@@ -18,6 +18,7 @@ namespace Gauchada.Backend.Model.Entity
         [Required] [MaxLength(7)] public string CarPlate { get; set; }
         public DriverEntity Driver { get; set; }
         public CarEntity Car { get; set; }
+        public Chat Chat { get; set; }
         public ICollection<PassengerEntity> Passengers { get; set; } = new List<PassengerEntity>();
     }
 }

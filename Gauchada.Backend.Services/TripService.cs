@@ -13,10 +13,12 @@ namespace Gauchada.Backend.Services
         private readonly IDriverRepository _driverRepository;
         private readonly ICarRepository _carRepository;
         private readonly IPassengerRepository _passengerRepository;
+        private readonly IChatRepository _chatRepository;
 
-        public TripService(ITripRepository tripRepository, IDriverRepository driverService, ICarRepository carService, IPassengerRepository passengerRepository)
+        public TripService(ITripRepository tripRepository, IDriverRepository driverService, ICarRepository carService, IPassengerRepository passengerRepository, IChatRepository chatRepository)
         {
             _tripRepository = tripRepository;
+            _chatRepository = chatRepository;
             _driverRepository = driverService;
             _carRepository = carService;
             _passengerRepository = passengerRepository;
@@ -188,6 +190,7 @@ namespace Gauchada.Backend.Services
                     Car = car
                 };
                 await _tripRepository.CreateTrip(tripEntity);
+                await _chatRepository.CreateTripChat(tripEntity.TripId);
                 return true;
             }
             catch (Exception ex)

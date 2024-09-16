@@ -4,6 +4,7 @@ using Gauchada.Backend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gauchada.Backend.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240913212533_ChatEntitiesAdded")]
+    partial class ChatEntitiesAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -159,6 +162,9 @@ namespace Gauchada.Backend.API.Migrations
                     b.Property<int>("ChatId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ChatId1")
+                        .HasColumnType("int");
+
                     b.Property<string>("MessageContent")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -173,6 +179,8 @@ namespace Gauchada.Backend.API.Migrations
                     b.HasKey("MessageId");
 
                     b.HasIndex("ChatId");
+
+                    b.HasIndex("ChatId1");
 
                     b.HasIndex("WriterUsername");
 
@@ -296,7 +304,7 @@ namespace Gauchada.Backend.API.Migrations
             modelBuilder.Entity("Gauchada.Backend.Model.Entity.DriverMessage", b =>
                 {
                     b.HasOne("Gauchada.Backend.Model.Entity.Chat", "Chat")
-                        .WithMany("DriverMessages")
+                        .WithMany()
                         .HasForeignKey("ChatId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -319,6 +327,10 @@ namespace Gauchada.Backend.API.Migrations
                         .HasForeignKey("ChatId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Gauchada.Backend.Model.Entity.Chat", null)
+                        .WithMany("DriverMessages")
+                        .HasForeignKey("ChatId1");
 
                     b.HasOne("Gauchada.Backend.Model.Entity.PassengerEntity", "Writer")
                         .WithMany("Messages")

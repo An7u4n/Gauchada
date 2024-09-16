@@ -12,6 +12,8 @@ namespace Gauchada.Backend.Model.Entity
     {
         public ICollection<CarEntity> Cars { get; set; } = new List<CarEntity>();
         public ICollection<TripEntity> Trips { get; set; } = new List<TripEntity>();
+        public ICollection<DriverMessage> Messages { get; set; } = new List<DriverMessage>();
+
 
         public DriverEntity() { }
         public DriverEntity(AddUserDTO passenger, string photoSrc)
