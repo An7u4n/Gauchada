@@ -18,6 +18,7 @@ namespace Gauchada.Backend.Model.DTO
         public TripDTO() { }
         public TripDTO(TripEntity trip)
         {
+            TripId = trip.TripId;
             Origin = trip.Origin;
             Destination = trip.Destination;
             StartDate = trip.StartDate;

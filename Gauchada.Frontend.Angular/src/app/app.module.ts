@@ -17,6 +17,8 @@ import { AddCarComponent } from './Components/add-car/add-car.component';
 import { ProfileDashboardComponent } from './Components/profile-dashboard/profile-dashboard.component';
 import { JwtInterceptor } from './Services/JWTInterceptor';
 import { TripCardPopupComponent } from './Components/trip-card-popup/trip-card-popup.component';
+import { ChatComponent } from './Components/chat/chat.component';
+import { TripDetailComponent } from './Components/trip-detail/trip-detail.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { TripCardPopupComponent } from './Components/trip-card-popup/trip-card-p
     PostTripComponent,
     AddCarComponent,
     ProfileDashboardComponent,
-    TripCardPopupComponent
+    TripCardPopupComponent,
+    ChatComponent,
+    TripDetailComponent
   ],
   imports: [
     BrowserModule,

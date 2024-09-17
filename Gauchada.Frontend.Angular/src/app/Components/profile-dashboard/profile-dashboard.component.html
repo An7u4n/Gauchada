@@ -15,7 +15,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let trip of trips">
+      <tr *ngFor="let trip of trips" (click)="onTripDetail(trip)">
         <td>{{ trip.startDate }}</td>
         <td>{{ trip.origin }}</td>
         <td>{{ trip.destination }}</td>

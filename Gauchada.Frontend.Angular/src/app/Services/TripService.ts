@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../Models/response.model';
+import { Trip } from '../Models/trip.model';
 
 @Injectable({
   providedIn: 'root'
@@ -29,4 +30,15 @@ export class TripService {
   postTrip(origin: string, destination: string, date: string, user: string, plate: string): Observable<ApiResponse> {
     return this._http.post<any>(this.tripsUrl, {origin: origin, destination: destination, startDate: date, driverUserName: user, carPlate: plate});
   }
+
+  setSavedTrip(trip: Trip): void {
+    localStorage.setItem('savedTrip', JSON.stringify(trip));
+  }
+
+  getSavedTrip(): Trip {
+    let trip = localStorage.getItem('savedTrip');
+    if (trip != null) return JSON.parse(trip);
+    else throw new Error("No saved trip");
+  }
+
 }

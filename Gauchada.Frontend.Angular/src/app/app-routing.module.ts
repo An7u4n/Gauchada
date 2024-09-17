@@ -7,6 +7,7 @@ import { PostTripComponent } from './Components/post-trip/post-trip.component';
 import { loginGuard } from './Guards/login-guard.guard';
 import { AddCarComponent } from './Components/add-car/add-car.component';
 import { ProfileDashboardComponent } from './Components/profile-dashboard/profile-dashboard.component';
+import { TripDetailComponent } from './Components/trip-detail/trip-detail.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -15,7 +16,9 @@ const routes: Routes = [
   { path: 'add-trip', component: PostTripComponent, canActivate: [loginGuard] },
   { path: 'trips', component: SearchPageComponent, canActivate: [loginGuard] },
   { path: 'add-car', component: AddCarComponent, canActivate: [loginGuard] },
-  { path: 'profile', component: ProfileDashboardComponent, canActivate: [loginGuard] }
+  { path: 'profile', component: ProfileDashboardComponent, canActivate: [loginGuard] },
+  { path: 'trip-detail', component: TripDetailComponent, canActivate: [loginGuard] }
+
 ];
 
 @NgModule({

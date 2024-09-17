@@ -6,6 +6,7 @@ import { DriverService } from '../../Services/DriverService';
 import { User } from '../../Models/user.model';
 import { TripService } from '../../Services/TripService';
 import { UserService } from '../../Services/UserService';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-dashboard',
@@ -21,7 +22,7 @@ export class ProfileDashboardComponent implements OnInit {
   hasTrips: boolean = false;
   isDriver: boolean = false;
 
-  constructor(private _carService: CarService, private _userService: UserService, private _tripService: TripService, private _driverService: DriverService) {
+  constructor(private _carService: CarService, private _userService: UserService, private _tripService: TripService, private _driverService: DriverService, private router: Router) {
     this.user = _userService.getLoggedUser();
     let userType = _userService.getLoggedUserType();
     if(userType == 'driver'){
@@ -70,5 +71,10 @@ export class ProfileDashboardComponent implements OnInit {
 
   onMyTrips(){
     this.myTrips = !this.myTrips;
+  }
+
+  onTripDetail(trip: Trip) {
+    this._tripService.setSavedTrip(trip);
+    this.router.navigate(['/trip-detail']);
   }
 }

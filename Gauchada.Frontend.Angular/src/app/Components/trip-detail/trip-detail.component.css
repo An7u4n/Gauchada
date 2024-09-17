@@ -1,0 +1,69 @@
+.trip-card {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 1000px;
+  margin: 20px auto;
+  height: 400px;
+}
+
+.driver-info, .trip-details, .passengers {
+  flex: 1;
+  text-align: center;
+}
+
+  .driver-info .label, .passengers .label {
+    font-weight: bold;
+    color: #3498db;
+  }
+
+.driver-name {
+  font-weight: bold;
+  color: #3498db;
+  text-decoration: none;
+}
+
+.driver-photo, .passenger-photo {
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  margin-top: 10px;
+}
+
+.trip-details h2, .trip-details h3 {
+  margin: 0;
+}
+
+.trip-date {
+  color: grey;
+}
+
+.arrow-down {
+  font-size: 24px;
+  margin: 10px 0;
+}
+
+.passenger-list {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.sign-up-button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+  .sign-up-button:hover {
+    background-color: #2980b9;
+  }

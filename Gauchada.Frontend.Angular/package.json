@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "^17.0.0",
     "@angular/router": "^17.0.0",
     "@auth0/angular-jwt": "^5.2.0",
+    "@microsoft/signalr": "^8.0.7",
     "cally": "^0.7.1",
     "jest-editor-support": "*",
     "rxjs": "~7.8.0",

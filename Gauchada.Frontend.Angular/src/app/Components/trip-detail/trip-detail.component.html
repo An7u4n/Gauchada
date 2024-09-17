@@ -1,0 +1,26 @@
+<div class="trip-card">
+  <div class="driver-info">
+    <p class="label">Driver:</p>
+    <a href="#" class="driver-name">{{ trip.driverUserName }}</a>
+    <img [src]="" alt="Driver photo" class="driver-photo">
+  </div>
+
+  <div class="trip-details">
+    <h2>{{ trip.origin }}</h2>
+    <p class="trip-date">{{ trip.startDate }}</p>
+    <div class="arrow-down">↓</div>
+    <h3>{{ trip.destination }}</h3>
+  </div>
+
+  <div class="passengers">
+    <p class="label">Passengers</p>
+    <div class="passenger-list">
+      <div class="passenger" *ngFor="let passenger of passengers" >
+        <p>{{ passenger.userName }}Miguel</p>
+        <img [src]="passenger.photoSrc" alt="Passenger photo" class="passenger-photo">
+      </div>
+    </div>
+  </div>
+
+  <app-chat></app-chat>
+</div>
