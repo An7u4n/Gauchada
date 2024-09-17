@@ -4,22 +4,22 @@
 
 The app uses Entity Framework as ORM, its secured via JWT (JSON Web Tokens) using Bearer Tokens and xUnit for api Tests.
 User images are stored in a dedicated folder on the server, and their paths are saved in the database.
+Each Trip contains a dedicated real time chat using SignalR to coordinate the Trip.
 ## Class Diagram
 
-
-![GauchadaObjetosSinChat](https://github.com/user-attachments/assets/592a2806-e30a-492a-af5c-ffc81c87fb1b)
+![ClassDiagram (1)](https://github.com/user-attachments/assets/49055b3a-1cae-4e65-a3b4-dd474fc93431)
 
 
 ## Use Cases
 ### Driver
   - Add Car
-  - Delete Car
   - Create a Trip
   - View created Trips
   - View added Cars
+  - Chat in a created Trip
 
 ### Passenger
   - Search a Trip between two cities
   - Sign in a Trip
   - View signed Trips
-
+  - Chat in a signed Trip
