@@ -23,3 +23,7 @@ Each Trip contains a dedicated real time chat using SignalR to coordinate the Tr
   - Sign in a Trip
   - View signed Trips
   - Chat in a signed Trip
+
+## A picture of the App User Interface
+
+![Captura de pantalla 2024-09-17 200629](https://github.com/user-attachments/assets/be2ed04a-1f84-49ab-a97a-2c2a91eed4ee)
