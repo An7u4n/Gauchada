@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CarService } from '../../Services/CarService';
 import { Car } from '../../Models/car.model';
 import { max } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-car',
@@ -15,11 +16,11 @@ export class AddCarComponent {
     model: '',
     year: '',
     color: '',
-    maxPassengers: 0,
+    maxPassengers: 5,
   }
   postError: string = '';
 
-  constructor(private _carService: CarService) {}
+  constructor(private _carService: CarService, private router: Router) { }
 
   postCar(e: Event) {
     e.preventDefault();
@@ -28,7 +29,8 @@ export class AddCarComponent {
       this._carService.postCar(new Car(this.formData.plate,this.formData.brand,this.formData.model+' '+this.formData.year,this.formData.color,'',this.formData.maxPassengers))
       .subscribe(postResult => {
         if(postResult.success === true) {
-          alert('Auto agregado correctamente');
+          alert('Car Succesfully Added');
+          this.router.navigate(['']);
         } else {
           this.postError = 'Error al agregar el auto, ', postResult.message;
         }
@@ -39,15 +41,15 @@ export class AddCarComponent {
 
   validateForm() {
     if (this.formData.plate.length < 6) {
-      this.postError = 'La patente debe tener 6 o 7 caracteres';
+      this.postError = 'CarPlate must be 6 or 7 characters long';
     } else if (this.formData.brand.length < 2) {
-      this.postError = 'Por favor ingrese una marca';
+      this.postError = 'Please enter a valid car brand';
     } else if (this.formData.model.length < 2) {
-      this.postError = 'Por favor ingrese un modelo';
+      this.postError = 'Please enter a valid car model';
     } else if (this.formData.year.length < 4) {
-      this.postError = 'Por favor ingrese un año valido';
+      this.postError = 'Please enter a valid year';
     } else if (this.formData.color.length < 2) {
-      this.postError = 'El color debe tener al menos 2 caracteres';
+      this.postError = 'Car color must be at least 2 characters long';
     } else {
       this.postError = '';
     }

@@ -57,14 +57,6 @@ export class ProfileDashboardComponent implements OnInit {
     }
   }
 
-  updateCar(car: Car){
-    console.log("update car to be implemented")
-  }
-
-  deleteCar(car: Car){
-    console.log("delete car to be implemented")
-  }
-
   onMyCars(){
     this.myCars = !this.myCars;
   }

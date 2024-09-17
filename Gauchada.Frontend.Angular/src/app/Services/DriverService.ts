@@ -9,6 +9,7 @@ import { ApiResponse } from '../Models/response.model';
 })
 export class DriverService {
   driverUrl = 'http://localhost:5080/api/Drivers';
+  registerUrl = 'http://localhost:5080/api/UserLogin/Register/Driver'
   loggedDriver: User | undefined;
   constructor(private _http: HttpClient) { }
 
@@ -35,6 +36,6 @@ export class DriverService {
     formData.append('Email', user.email);
     formData.append('PhoneNumber', user.phoneNumber);
     formData.append('Photo', photo);
-    return this._http.post<any>(`${this.driverUrl}`, formData);
+    return this._http.post<any>(`${this.registerUrl}`, formData);
   }
 }

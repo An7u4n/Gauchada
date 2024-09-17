@@ -1,10 +1,13 @@
 <div class="chat-container">
-  <div class="message" *ngFor="let message of messages">
-    <strong>{{ message.writerUsername }}:</strong> {{ message.messageContent }}
+  <div class="subtitle">Chat for trip between {{ trip.origin }} and {{  trip.destination }} drivered by {{ trip.driverUserName }} </div>
+  <div class="message-container">
+    <div class="message" *ngFor="let message of messages">
+      <strong>{{ message.writerUsername }}:</strong> {{ message.messageContent }}
+    </div>
   </div>
 
   <div class="input-container">
-    <input [(ngModel)]="newMessageContent" placeholder="Type your message here..." />
+    <input (keydown)="onKeydown($event)" [(ngModel)]="newMessageContent" placeholder="Type your message here..." />
     <button (click)="sendMessage()">Send</button>
   </div>
 </div>

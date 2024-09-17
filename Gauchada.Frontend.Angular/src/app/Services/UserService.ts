@@ -36,7 +36,15 @@ export class UserService {
   }
 
   loginPassenger(username: string, password: string): Observable<boolean> {
-    return this._http.get<ApiResponse>(`${this.passengersUrl}?passengerUserName=${username}`).pipe(
+    return this._http.post<ApiResponse>(`http://localhost:5080/api/UserLogin/Passenger?username=${username}&password=${password}`, {})
+    .pipe(
+      map(res => {
+        localStorage.setItem('token', res.data);
+        return res.data;
+      }),
+      switchMap(token => {
+        return this._http.get<ApiResponse>(`${this.passengersUrl}?passengerUserName=${username}`);
+      }),
       map(res => {
         if (res.success && res.data) {
           localStorage.setItem('passenger', JSON.stringify(res.data));

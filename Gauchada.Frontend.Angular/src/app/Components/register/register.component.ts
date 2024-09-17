@@ -43,11 +43,21 @@ export class RegisterComponent {
         this.registerForm.value.phoneNumber!,
         ''
       );
-      if(this.registerForm.value.userType == 'driver'){
-        this._driverService.postDriver(user, this.image).subscribe(returnValue => console.log(returnValue), error => console.error(error));
+      if (this.registerForm.value.userType == 'driver') {
+        this._driverService.postDriver(user, this.image).subscribe(returnValue => {
+          if (returnValue.Success) {
+            alert(`Congrats ${user.userName} you was succesfully registered as driver in Gauchada. Enjoy!`);
+            this.router.navigate(['/login']);
+        } else alert("Error: " + returnValue.Message);
+        }, error => console.error(error));
   
       } else if(this.registerForm.value.userType == 'passenger') {
-        this._passengerService.postPassenger(user, this.image).subscribe(returnValue => console.log(returnValue), error => console.error(error));
+        this._passengerService.postPassenger(user, this.image).subscribe(returnValue => {
+          if (returnValue.Success) {
+            alert(`Congrats ${user.userName} you was succesfully registered as passsenger in Gauchada. Enjoy!`);
+            this.router.navigate(['/login']);
+          } else alert("Error: " + returnValue.Message);
+        }, error => console.error(error));
       }
     }
     

@@ -4,6 +4,8 @@ import { ChatService } from '../../Services/ChatService';
 import { MessageService } from '../../Services/MessageService';
 import { UserService } from '../../Services/UserService';
 import { TripService } from '../../Services/TripService';
+import { Trip } from '../../Models/trip.model';
+import { sendMessage } from '@microsoft/signalr/dist/esm/Utils';
 
 @Component({
   selector: 'app-chat',
@@ -13,14 +15,12 @@ import { TripService } from '../../Services/TripService';
 export class ChatComponent implements OnInit {
 
   messages = [
-    { writerUsername: 'Alice', messageContent: 'Hello!' },
-    { writerUsername: 'Bob', messageContent: 'Hi Alice, how are you?' },
-    { writerUsername: 'Alice', messageContent: 'I’m good, thanks for asking!' },
-    { writerUsername: 'Bob', messageContent: 'Great to hear!' }
+    { writerUsername: 'Alice', messageContent: 'Hello!', writeTime: '2024-10-21T12:00:00' }
   ];
   newMessageContent = '';
   chatId!: number;
-  @Input() tripId!: number;
+  @Input() trip!: Trip;
+  tripId!: number;
   connection: HubConnection;
   constructor(private _chatService: ChatService, private _messageService: MessageService, private _userService: UserService, private _tripService: TripService)
   {
@@ -33,6 +33,8 @@ export class ChatComponent implements OnInit {
     this.tripId = this._tripService.getSavedTrip().tripId;
     this._chatService.getChatMessages(this.tripId).subscribe(res => {
       this.messages = res.data.messages;
+      console.log(res.data.messages);
+      this.messages.sort((a, b) => new Date(a.writeTime).getTime() - new Date(b.writeTime).getTime());
       this.chatId = res.data.chatId;
 
       // Connection to SignalR ChatHub
@@ -40,7 +42,7 @@ export class ChatComponent implements OnInit {
         this.connection.invoke("JoinChat", this.chatId.toString());
 
         this.connection.on("ReceiveMessage", (user, message) => {
-          this.messages.push({ writerUsername: user, messageContent: message });
+          this.messages.push({ writerUsername: user, messageContent: message, writeTime: '' });
         });
       
       }).catch(err => console.error("Error al conectar al hub: ", err));
@@ -49,14 +51,15 @@ export class ChatComponent implements OnInit {
   
   }
 
-  sendMessage(/*user: string, message: string*/): void {
-    //this.connection.invoke("SendMessageToChat", chatId, user, message)
-    //this.connection.invoke("SendMessageToChat", this.chatId.toString(), "Lucas", this.newMessageContent)
-    //  .catch(err => console.error('Error al enviar el mensaje: ', err));
+  sendMessage(): void {
     this._messageService.postMessage(this.tripId, this.newMessageContent).subscribe(res => {
       if (!res.success) console.error("Mensaje no guardado");
     }, err => console.error(err));
     this.newMessageContent = '';
+  }
 
+  onKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Enter')
+      this.sendMessage();
   }
 }

@@ -20,8 +20,4 @@ export class CarService {
     car.ownerUserName = this._userService.getLoggedUser().userName;
     return this._http.post<ApiResponse>(this.carsUrl, car);
   }
-
-  deleteCar(carPlate: string): Observable<ApiResponse> {
-    return this._http.delete<ApiResponse>(`${this.carsUrl}?carPlate=${carPlate}`);
-  }
 }

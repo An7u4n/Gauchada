@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from '../../Models/user.model';
 import { UserService } from '../../Services/UserService';
 import { Router } from '@angular/router';
@@ -8,15 +8,22 @@ import { Router } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent {
-  user: User;
+export class HeaderComponent implements OnInit{
+  user!: User;
   isDropdownOpen: boolean = false;
   isDriver: boolean = false;
   constructor(private _loginService: UserService, private router: Router) {
+
+  }
+
+  ngOnInit() {
     this.user = this._loginService.getLoggedUser();
-    let userType = _loginService.getLoggedUserType();
-    if(userType == 'driver'){
+    let userType = this._loginService.getLoggedUserType();
+    if (userType == 'driver') {
       this.isDriver = true;
+      this.user.photoSrc = 'http://localhost:5080/images/driver/' + this.user.photoSrc;
+    } else {
+      this.user.photoSrc = 'http://localhost:5080/images/passenger/' + this.user.photoSrc;
     }
   }
 
@@ -37,8 +44,11 @@ export class HeaderComponent {
     this.router.navigate(['/add-car']);
   }
 
-  onLogoClick(){
-    this.router.navigate(['/trips']);
+  onLogoClick() {
+    if (this.isDriver)
+      this.router.navigate(['/add-trip']);
+    else
+      this.router.navigate(['/trips']);
   }
   
   onTripSearch(){

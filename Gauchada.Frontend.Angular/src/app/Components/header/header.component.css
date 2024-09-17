@@ -12,7 +12,19 @@ ul{
   text-decoration: none;
 }
 
-a,ul li {
+img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.profile-name{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+a, ul li {
   font-weight: bold;
   color: #42B0FF;
   list-style: none;

@@ -2,9 +2,9 @@
   <app-header></app-header>
   <p class="title">{{ this.user.userName }} Profile</p>
   <p class="subtitle" (click)="onMyTrips()" *ngIf="hasTrips">
-    My Trips<span>&darr;</span>
+    My Trips<span *ngIf="!myTrips">&darr;</span><span *ngIf="myTrips">&uarr;</span>
   </p>
-  <table class="car-table" *ngIf="myTrips">
+  <table class="car-table trip-table" *ngIf="myTrips">
     <thead>
       <tr>
         <th>StartDate</th>
@@ -29,7 +29,7 @@
   </p>
 
   <p class="subtitle" (click)="onMyCars()" *ngIf="isDriver">
-    My Cars<span>&darr;</span>
+    My Cars<span *ngIf="!myCars">&darr;</span><span *ngIf="myCars">&uarr;</span>
   </p>
   <table class="car-table" *ngIf="myCars">
     <thead>
@@ -39,7 +39,6 @@
         <th>Model</th>
         <th>Color</th>
         <th>Max Passengers</th>
-        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -49,10 +48,6 @@
         <td>{{ car.model }}</td>
         <td>{{ car.color }}</td>
         <td>{{ car.maxPassengers }}</td>
-        <td>
-          <button (click)="updateCar(car)">Update</button>
-          <button (click)="deleteCar(car)">Delete</button>
-        </td>
       </tr>
     </tbody>
   </table>

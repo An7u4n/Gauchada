@@ -5,6 +5,7 @@ import { DriverService } from '../../Services/DriverService';
 import { User } from '../../Models/user.model';
 import { BehaviorSubject } from 'rxjs';
 import { UserService } from '../../Services/UserService';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-trip',
@@ -20,12 +21,12 @@ export class PostTripComponent implements OnInit {
     hour: '',
     carPlate: ''
   }
-  driver: User;
-  constructor(private _tripService: TripService, private _carService: CarService, private _userService: UserService) {
-    this.driver = _userService.getLoggedUser();
+  driver!: User;
+  constructor(private _tripService: TripService, private _carService: CarService, private _userService: UserService, private router: Router) {
   }
 
   ngOnInit(): void {
+    this.driver = this._userService.getLoggedUser();
     this._carService.getUserCars(this.driver.userName).subscribe(carRet => {
       if(carRet && carRet.data){
         this.cars = carRet.data;
@@ -39,8 +40,12 @@ export class PostTripComponent implements OnInit {
 
       event.preventDefault();
       this._tripService.postTrip(this.formData.origin, this.formData.destination, calendar.value+'T'+this.formData.hour+':00', this.driver.userName, this.formData.carPlate)
-      .subscribe(responseMessage => console.log(responseMessage), error => this.postError = error);
-      // Add post method to the service
+        .subscribe(responseMessage => {
+
+          this._tripService.setSavedTrip(responseMessage.data);
+          alert("Gauchada Created With Success");
+          this.router.navigate(['/trip-detail']);
+        }, error => this.postError = error);
     }
   }
   checkErrors(date: any): boolean {

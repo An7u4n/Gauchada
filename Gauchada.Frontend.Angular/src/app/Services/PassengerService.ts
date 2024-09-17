@@ -8,6 +8,7 @@ import { User } from '../Models/user.model';
 })
 export class PassengerService {
   passengerUrl = 'http://localhost:5080/api/Passengers';
+  passengerRegisterUrl = 'http://localhost:5080/api/UserLogin/Register/Passenger';
   constructor(private _http: HttpClient) { }
 
   getLoggedPassenger(): User | null {
@@ -26,6 +27,6 @@ export class PassengerService {
     formData.append('Email', user.email);
     formData.append('PhoneNumber', user.phoneNumber);
     formData.append('Photo', photo);
-    return this._http.post<any>(`${this.passengerUrl}`, formData);
+    return this._http.post<any>(`${this.passengerRegisterUrl}`, formData);
   }
 }

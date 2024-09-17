@@ -3,8 +3,20 @@
   margin: 0 auto;
   border: 1px solid #ccc;
   padding: 10px;
-  border-radius: 10px;
   background-color: #f9f9f9;
+  max-height: 380px;
+}
+
+.message-container {
+  flex: 1;
+  overflow-y: auto;
+  max-height: 280px;
+}
+
+.subtitle {
+    font-size: 12px;
+    text-align: center;
+    margin: 10px 0;
 }
 
 .message {
