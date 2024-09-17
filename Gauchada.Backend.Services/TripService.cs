@@ -165,7 +165,7 @@ namespace Gauchada.Backend.Services
             }
         }
 
-        public async Task<bool> SetTrip(TripDTO trip)
+        public async Task<TripDTO> SetTrip(TripDTO trip)
         {
             try
             {
@@ -189,9 +189,13 @@ namespace Gauchada.Backend.Services
                     Driver = driver,
                     Car = car
                 };
-                await _tripRepository.CreateTrip(tripEntity);
-                await _chatRepository.CreateTripChat(tripEntity.TripId);
-                return true;
+                var tripId = await _tripRepository.CreateTrip(tripEntity);
+                await _chatRepository.CreateTripChat(tripId);
+                var createdTripEntity = await _tripRepository.GetTripById(tripId);
+                if(createdTripEntity == null)
+                    throw new Exception("Trip not created");
+                var createdTrip = new TripDTO(createdTripEntity);
+                return createdTrip;
             }
             catch (Exception ex)
             {

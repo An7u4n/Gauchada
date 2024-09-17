@@ -7,6 +7,6 @@ namespace Gauchada.Backend.Services.Interfaces
         Task<CarDTO?> GetCarByPlate(string carPlate);
         Task<List<CarDTO>> GetCarsByUserName(string driverUserName);
         Task SaveCar(CarDTO car);
-        Task<bool> DeleteCar(string carPlate);
+        Task DeleteCar(string carPlate);
     }
 }

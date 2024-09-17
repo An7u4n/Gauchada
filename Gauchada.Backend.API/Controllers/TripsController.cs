@@ -73,15 +73,14 @@ namespace Gauchada.Backend.API.Controllers
             }
         }
 
-        
-
         [HttpPost]
         public async Task<ActionResult<ControllerResponse>> PostTrip(TripDTO trip)
         {
             try
             {
-                await _tripService.SetTrip(trip);
-                return Ok(ControllerResponse.SuccessResponse(trip, "Trip Created"));
+                var createdTrip = await _tripService.SetTrip(trip);
+                
+                return StatusCode(201, ControllerResponse.SuccessResponse(createdTrip, "Trip Created"));
             }
             catch (Exception ex)
             {
@@ -96,7 +95,7 @@ namespace Gauchada.Backend.API.Controllers
             try
             {
                 await _tripService.AddPassengerToATrip(tripId, passengerUserName);
-                return Ok(ControllerResponse.SuccessResponse(null, "Passenger Added To The Trip"));
+                return StatusCode(201, ControllerResponse.SuccessResponse(null, "Passenger Added To The Trip"));
             }
             catch (Exception ex)
             {
@@ -111,7 +110,7 @@ namespace Gauchada.Backend.API.Controllers
             try
             {
                 await _tripService.RemovePassengerFromATrip(tripId, passengerUserName);
-                return Ok(ControllerResponse.SuccessResponse(null, "Passenger Removed From The Trip"));
+                return NoContent();
             }
             catch(Exception ex)
             {

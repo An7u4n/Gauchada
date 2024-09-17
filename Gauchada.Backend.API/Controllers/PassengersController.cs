@@ -33,19 +33,5 @@ namespace Gauchada.Backend.API.Controllers
                 return NotFound(ControllerResponse.FailureResponse(ex.Message));
             }
         }
-
-        [HttpPost]
-        public async Task<ActionResult<ControllerResponse>> PostPassenger([FromForm] AddUserDTO passenger)
-        {
-            try
-            {
-                await _passengerService.AddPassenger(passenger);
-                return Ok(ControllerResponse.SuccessResponse(null, "Passenger Registered"));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ControllerResponse.FailureResponse(ex.Message));
-            }
-        }
     }
 }

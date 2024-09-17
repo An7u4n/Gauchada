@@ -14,9 +14,19 @@ namespace Gauchada.Backend.Services
             _carRepository = carRepository;
         }
 
-        public Task<bool> DeleteCar(string carPlate)
+        public async Task DeleteCar(string carPlate)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var car = await _carRepository.GetCarByPlate(carPlate);
+                if (car == null) 
+                    throw new Exception("Car doesnt Exists");
+                await _carRepository.DeleteCar(car);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<CarDTO?> GetCarByPlate(string carPlate)

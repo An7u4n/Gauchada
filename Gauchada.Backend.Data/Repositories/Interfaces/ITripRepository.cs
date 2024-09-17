@@ -4,7 +4,7 @@ namespace Gauchada.Backend.Data.Repositories.Interfaces
 {
     public interface ITripRepository
     {
-        Task CreateTrip(TripEntity trip);
+        Task<int> CreateTrip(TripEntity trip);
         Task<List<TripEntity>?> GetTripsByDateRange(string origin, string destination, DateTime minDate, DateTime maxDate);
         Task<List<TripEntity>?> GetTripsByExactDate(string origin, string destination, DateTime date);
         Task<List<TripEntity>?> GetTripsByPassenger(string passengerUserName);

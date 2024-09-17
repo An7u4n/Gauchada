@@ -51,12 +51,25 @@ namespace Gauchada.Backend.API.Controllers
             try
             {
                 await _carService.SaveCar(car);
-                return Ok(ControllerResponse.SuccessResponse(null, "Car Registered"));
+                return StatusCode(201, ControllerResponse.SuccessResponse(null, "Car Registered"));
             }
             catch(Exception ex)
             {
-
                return BadRequest(ControllerResponse.FailureResponse(ex.Message));
+            }
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult<ControllerResponse>> DeleteCar(string carPlate)
+        {
+            try
+            {
+                await _carService.DeleteCar(carPlate);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ControllerResponse.FailureResponse(ex.Message));
             }
         }
     }

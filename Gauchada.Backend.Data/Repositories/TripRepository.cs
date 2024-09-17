@@ -14,12 +14,13 @@ namespace Gauchada.Backend.Data.Repositories
             _context = context;
         }
 
-        public async Task CreateTrip(TripEntity trip)
+        public async Task<int> CreateTrip(TripEntity trip)
         {
             try
             {
                 _context.Trips.Add(trip);
                 await _context.SaveChangesAsync();
+                return trip.TripId;
             }
             catch(SqlException ex)
             {

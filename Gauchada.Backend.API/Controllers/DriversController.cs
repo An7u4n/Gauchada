@@ -47,20 +47,5 @@ namespace Gauchada.Backend.API.Controllers
                 return NotFound(ControllerResponse.FailureResponse(ex.Message));
             }
         }
-
-        [HttpPost]
-        public async Task<ActionResult<ControllerResponse>> PostDriver([FromForm] AddUserDTO driver)
-        {
-            try
-            {
-                await _driverService.AddDriver(driver);
-                return Ok(ControllerResponse.SuccessResponse(null, "Driver Registered"));
-
-            }
-            catch(Exception ex)
-            {
-                return BadRequest(ControllerResponse.FailureResponse(ex.Message));
-            }
-        }
     }
 }

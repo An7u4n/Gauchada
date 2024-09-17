@@ -13,7 +13,7 @@ namespace Gauchada.Backend.Services.Interfaces
         Task<List<TripDTO>> GetTripsByDateRange(string origin, string destination, DateTime minDate, DateTime maxDate);
         Task<List<UserDTO>> GetTripPassengers(int tripId);
         Task<List<TripDTO>> GetUserTrips(string passengerUserName);
-        Task<bool> SetTrip(TripDTO trip);
+        Task<TripDTO> SetTrip(TripDTO trip);
         Task<bool> AddPassengerToATrip(int tripId, string passengerUserName);
         Task<bool> RemovePassengerFromATrip(int tripId, string passengerUserName);
     }

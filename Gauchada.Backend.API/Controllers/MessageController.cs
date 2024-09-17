@@ -22,7 +22,7 @@ namespace Gauchada.Backend.API.Controllers
             try
             {
                 await _messageService.SendMessage(tripId, messageContent, writer, userType);
-                return Ok(ControllerResponse.SuccessResponse(null, "Message Added"));
+                return StatusCode(201, ControllerResponse.SuccessResponse(null, "Message Added"));
             }
 
             catch (Exception ex)

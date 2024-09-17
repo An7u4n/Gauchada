@@ -13,6 +13,23 @@ namespace Gauchada.Backend.Data.Repositories
             _context = context;
         }
 
+        public async Task DeleteCar(CarEntity car)
+        {
+            try
+            {
+                _context.Cars.Remove(car);
+                await _context.SaveChangesAsync();
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("DB Error: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Unknow Error In Repository: " + ex.Message);
+            }
+        }
+
         public async Task<CarEntity?> GetCarByPlate(string carPlate)
         {
             try
