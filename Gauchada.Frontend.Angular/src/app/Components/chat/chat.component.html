@@ -1,6 +1,6 @@
 <div class="chat-container">
   <div class="subtitle">Chat for trip between {{ trip.origin }} and {{  trip.destination }} drivered by {{ trip.driverUserName }} </div>
-  <div class="message-container">
+  <div class="message-container" #messageContainer>
     <div class="message" *ngFor="let message of messages">
       <strong>{{ message.writerUsername }}:</strong> {{ message.messageContent }}
     </div>

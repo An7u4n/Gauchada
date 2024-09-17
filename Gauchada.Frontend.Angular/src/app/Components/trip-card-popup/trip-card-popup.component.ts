@@ -3,6 +3,7 @@ import { DriverService } from '../../Services/DriverService';
 import { User } from '../../Models/user.model';
 import { TripService } from '../../Services/TripService';
 import { UserService } from '../../Services/UserService';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-trip-card-popup',
@@ -10,7 +11,7 @@ import { UserService } from '../../Services/UserService';
   styleUrl: './trip-card-popup.component.css'
 })
 export class TripCardPopupComponent implements OnInit {
-  constructor(private _tripService: TripService, private _userService: UserService) { }
+  constructor(private _tripService: TripService, private _userService: UserService, private router: Router) { }
   @Input() trip: any;
   @Input() driver: User | undefined;
   passengers: User[] = [];
@@ -40,10 +41,12 @@ export class TripCardPopupComponent implements OnInit {
     this._tripService.addPassengerToATrip(this.trip.tripId, this._userService.getLoggedUser().userName).subscribe(responseMessage =>
       {
         if(responseMessage.success) {
-          alert('Te has anotado correctamente a la gauchada');
+          alert('You was signed succesfully to the trip');
+          this._tripService.setSavedTrip(this.trip);
+          this.router.navigate(['/trip-detail']);
         }
         else {
-          alert('No se ha podido anotar a la gauchada');
+          alert('Couldnt be signed in the trip');
         }
       }
       , error => console.error(error));

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { ChatService } from '../../Services/ChatService';
 import { MessageService } from '../../Services/MessageService';
@@ -14,12 +14,13 @@ import { sendMessage } from '@microsoft/signalr/dist/esm/Utils';
 })
 export class ChatComponent implements OnInit {
 
+  @Input() trip!: Trip;
+  @ViewChild('messageContainer') private messageContainer!: ElementRef;
   messages = [
-    { writerUsername: 'Alice', messageContent: 'Hello!', writeTime: '2024-10-21T12:00:00' }
+    { writerUsername: 'Wait', messageContent: 'Loading Messages...', writeTime: '2024-10-21T12:00:00' }
   ];
   newMessageContent = '';
   chatId!: number;
-  @Input() trip!: Trip;
   tripId!: number;
   connection: HubConnection;
   constructor(private _chatService: ChatService, private _messageService: MessageService, private _userService: UserService, private _tripService: TripService)
@@ -33,7 +34,6 @@ export class ChatComponent implements OnInit {
     this.tripId = this._tripService.getSavedTrip().tripId;
     this._chatService.getChatMessages(this.tripId).subscribe(res => {
       this.messages = res.data.messages;
-      console.log(res.data.messages);
       this.messages.sort((a, b) => new Date(a.writeTime).getTime() - new Date(b.writeTime).getTime());
       this.chatId = res.data.chatId;
 
@@ -44,11 +44,9 @@ export class ChatComponent implements OnInit {
         this.connection.on("ReceiveMessage", (user, message) => {
           this.messages.push({ writerUsername: user, messageContent: message, writeTime: '' });
         });
-      
+        this.scrollToBottom();
       }).catch(err => console.error("Error al conectar al hub: ", err));
     });
-
-  
   }
 
   sendMessage(): void {
@@ -61,5 +59,10 @@ export class ChatComponent implements OnInit {
   onKeydown(event: KeyboardEvent): void {
     if (event.key === 'Enter')
       this.sendMessage();
+  }
+
+  private scrollToBottom(): void {
+    const container = this.messageContainer.nativeElement;
+    container.scrollTop = container.scrollHeight;
   }
 }

@@ -30,6 +30,8 @@ export class PostTripComponent implements OnInit {
     this._carService.getUserCars(this.driver.userName).subscribe(carRet => {
       if(carRet && carRet.data){
         this.cars = carRet.data;
+        if(this.cars.length > 0)
+          this.formData.carPlate = this.cars[0].carPlate;
       }
     }, error =>console.error(error));
 
@@ -48,6 +50,7 @@ export class PostTripComponent implements OnInit {
         }, error => this.postError = error);
     }
   }
+
   checkErrors(date: any): boolean {
     if(this.formData.origin == '' || this.formData.destination == '' || this.formData.hour == '' || this.formData.carPlate == ''){
       this.postError = "All fields are required";

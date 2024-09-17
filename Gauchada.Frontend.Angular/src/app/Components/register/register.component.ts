@@ -53,10 +53,9 @@ export class RegisterComponent {
   
       } else if(this.registerForm.value.userType == 'passenger') {
         this._passengerService.postPassenger(user, this.image).subscribe(returnValue => {
-          if (returnValue.Success) {
+          console.log(returnValue)
             alert(`Congrats ${user.userName} you was succesfully registered as passsenger in Gauchada. Enjoy!`);
             this.router.navigate(['/login']);
-          } else alert("Error: " + returnValue.Message);
         }, error => console.error(error));
       }
     }

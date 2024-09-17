@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
         } else {
           this.router.navigate(['/trips']);
         }
-      });
+      }, () => this.errorMessage = 'User or password wrong');
     } else {
       this._loginService.loginPassenger(username, password).subscribe(isLoggedIn => {
         if (!isLoggedIn) {
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
         } else {
           this.router.navigate(['/trips']);
         }
-      });
+      },() => this.errorMessage = 'User or password wrong');
     }
     } else {
       this.errorMessage = 'Please fill all the fields';
