@@ -1,7 +1,25 @@
-Gauchada merge in the needs of an appliaction to connect people in shared particular car trips.
-In the app you could create an driver or passenger account and create or join trips.
+# Gauchada Travel App
 
-Architecture is a traditional three layer architecture using Angular for user interface, .Net with C# in Service layer and SQL Server for Entity Persistance but can be changed easily thanks to Repository Pattern.
+**Gauchada** is an end-to-end application designed to connect passengers with private car drivers for ride-sharing. It follows a traditional three-layer architecture, utilizing Angular for the user interface, .NET with C# in the service layer, and SQL Server for data persistence.
 
-Class Diagram:
-![image](https://github.com/user-attachments/assets/daa81f7d-efea-45b9-9714-59d23c82b01a)
+The app uses Entity Framework as ORM, its secured via JWT (JSON Web Tokens) using Bearer Tokens and xUnit for api Tests.
+User images are stored in a dedicated folder on the server, and their paths are saved in the database.
+## Class Diagram
+
+
+![GauchadaObjetosSinChat](https://github.com/user-attachments/assets/592a2806-e30a-492a-af5c-ffc81c87fb1b)
+
+
+## Use Cases
+### Driver
+  - Add Car
+  - Delete Car
+  - Create a Trip
+  - View created Trips
+  - View added Cars
+
+### Passenger
+  - Search a Trip between two cities
+  - Sign in a Trip
+  - View signed Trips
+
