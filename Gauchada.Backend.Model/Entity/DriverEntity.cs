@@ -1,10 +1,5 @@
 ﻿using Gauchada.Backend.Model.DTO;
 using Gauchada.Backend.Model.Entity.Abstract;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Gauchada.Backend.Model.Entity
 {
@@ -16,7 +11,7 @@ namespace Gauchada.Backend.Model.Entity
 
 
         public DriverEntity() { }
-        public DriverEntity(AddUserDTO passenger, string photoSrc)
+        public DriverEntity(AddUserDTO passenger, string? photoSrc)
         : base(passenger.UserName, passenger.Name, passenger.LastName, passenger.Email, passenger.Birth, passenger.PhoneNumber, photoSrc)
         {
         }

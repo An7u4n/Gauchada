@@ -1,10 +1,4 @@
-﻿using Gauchada.Backend.Model.Entity.Abstract;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Gauchada.Backend.Model.Entity
 {
@@ -15,6 +9,6 @@ namespace Gauchada.Backend.Model.Entity
         [Required] public int TripId { get; set; }
         public ICollection<Message> Messages { get; set; } = new List<Message>();
         public ICollection<DriverMessage> DriverMessages { get; set; } = new List<DriverMessage>();
-        public TripEntity Trip { get; set; }
+        public TripEntity? Trip { get; set; }
     }
 }

@@ -8,11 +8,6 @@ using Gauchada.Backend.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Gauchada.Backend.ApiTest
 {
@@ -22,7 +17,7 @@ namespace Gauchada.Backend.ApiTest
         private AppDbContext _dbContext;
         private Mock<CarRepository>? _mockCarRepository;
         private Mock<CarService>? _carService;
-        private CarsController? _controller;
+        private CarsController _controller;
 
         public CarControllerTests()
         {
@@ -98,7 +93,6 @@ namespace Gauchada.Backend.ApiTest
             _dbContext.Dispose();
             _mockCarRepository = null;
             _carService = null;
-            _controller = null;
         }
     }
 }

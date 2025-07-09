@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Gauchada.Backend.Model.Entity
 {
     public class CarEntity
     {
-        [Key] [Required] [MaxLength(7)] public string CarPlate { get; set; }
-        [Required] [MaxLength(35)] public string Brand { get; set; }
-        [Required] [MaxLength(35)] public string Model { get; set; }
-        [Required] [MaxLength(20)] public string Color { get; set; }
-        [Required] public int MaxPassengers { get; set; }
-        [Required] [MaxLength(32)] public string OwnerUserName { get; set; }
-        public DriverEntity Owner { get; set; }
+        [Key] [Required] [MaxLength(7)] public required string CarPlate { get; set; }
+        [Required] [MaxLength(35)] public required string Brand { get; set; }
+        [Required] [MaxLength(35)] public required string Model { get; set; }
+        [Required] [MaxLength(20)] public required string Color { get; set; }
+        public int MaxPassengers { get; set; }
+        [Required] [MaxLength(32)] public required string OwnerUserName { get; set; }
+        public DriverEntity? Owner { get; set; }
         public ICollection<TripEntity> Trips { get; set; } = new List<TripEntity>();
     }
 }

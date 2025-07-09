@@ -4,13 +4,13 @@ namespace Gauchada.Backend.Model.DTO
 {
     public class AddUserDTO
     {
-        public string UserName { get; set; }
-        public string Name { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public DateTime Birth { get; set; }
-        public string PhoneNumber { get; set; }
-        public IFormFile Photo { get; set; }
+        public required string UserName { get; set; }
+        public required string Name { get; set; }
+        public required string LastName { get; set; }
+        public required string Email { get; set; }
+        public required DateTime Birth { get; set; }
+        public required string PhoneNumber { get; set; }
+        public IFormFile? Photo { get; set; }
 
         public AddUserDTO() { }
 

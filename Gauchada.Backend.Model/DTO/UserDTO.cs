@@ -2,13 +2,15 @@
 {
     public class UserDTO
     {
-        public string UserName { get; set; }
-        public string Name { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
+        public required string UserName { get; set; }
+        public required string Name { get; set; }
+        public required string LastName { get; set; }
+        public required string Email { get; set; }
         public DateTime Birth { get; set; }
-        public string PhoneNumber { get; set; }
-        public string PhotoSrc { get; set; }
+        public required string PhoneNumber { get; set; }
+        public required string PhotoSrc { get; set; }
+
+        public UserDTO() { }
 
         public UserDTO(string userName, string name, string lastName, string email, DateTime birth, string phoneNumber, string photoSrc)
         {
@@ -20,7 +22,7 @@
             PhoneNumber = phoneNumber;
             PhotoSrc = photoSrc;
         }
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             var other = obj as UserDTO;
 

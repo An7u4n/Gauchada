@@ -23,15 +23,34 @@ namespace Gauchada.Backend.Services
             {
                 if (passenger.Birth > DateTime.Now.AddYears(-16))
                     throw new Exception("Passenger must be 16 years old or older");
-                if (passenger.Photo.Length > 1 * 1024 * 1024)
+
+                var newPassenger = new PassengerEntity
                 {
-                    throw new Exception("Image size should not exceed 1 MB");
+                    UserName = passenger.UserName,
+                    Name = passenger.Name,
+                    LastName = passenger.LastName,
+                    Email = passenger.Email,
+                    PhoneNumber = passenger.PhoneNumber,
+                    Birth = passenger.Birth
+                };
+
+                if (passenger.Photo != null)
+                {
+                    string createdImageName = "";
+
+                    if (passenger.Photo.Length > 1 * 1024 * 1024)
+                    {
+                        throw new Exception("Image size should not exceed 1 MB");
+                    }
+
+                    string[] allowedFileExtentions = [".jpg", ".jpeg", ".png"];
+
+                    createdImageName = await _fileStorageService.SaveFileAsync(passenger.Photo, allowedFileExtentions, "passenger");
+
+                    newPassenger.PhotoSrc = createdImageName;
                 }
 
-                string[] allowedFileExtentions = [".jpg", ".jpeg", ".png"];
-                string createdImageName = await _fileStorageService.SaveFileAsync(passenger.Photo, allowedFileExtentions, "passenger");
-
-                await _passengerRepository.AddPassenger(new PassengerEntity(passenger, createdImageName));
+                await _passengerRepository.AddPassenger(newPassenger);
             }
             catch(Exception ex)
             {
@@ -47,7 +66,18 @@ namespace Gauchada.Backend.Services
                 if (passengerEntity == null)
                     throw new Exception("Passenger not found");
 
-                return new UserDTO(passengerEntity.UserName, passengerEntity.Name, passengerEntity.LastName, passengerEntity.Email, passengerEntity.Birth, passengerEntity.PhoneNumber, passengerEntity.PhotoSrc);
+                var passengerDto = new UserDTO
+                {
+                    UserName = passengerEntity.UserName,
+                    Birth = passengerEntity.Birth,
+                    Email = passengerEntity.Email,
+                    Name = passengerEntity.Name,
+                    LastName = passengerEntity.LastName,
+                    PhoneNumber = passengerEntity.PhoneNumber,
+                    PhotoSrc = passengerEntity.PhotoSrc ?? ""
+                };
+
+                return passengerDto;
                 
             }
             catch (Exception ex)

@@ -3,12 +3,6 @@ using Gauchada.Backend.Data.Repositories;
 using Gauchada.Backend.Model.Entity;
 using Microsoft.EntityFrameworkCore;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
 
 namespace Gauchada.Backend.ApiTest
 {
@@ -37,15 +31,15 @@ namespace Gauchada.Backend.ApiTest
             _dbContext.Chats.Add(chat);
             _dbContext.SaveChanges();
 
-            await _messageRepository.Object.CreateMessage(1, "hola", "Writer");
+            await _messageRepository.Object.CreateMessage(1, "hola", "Writer", "User");
 
 
             // Act  
             var result = await _chatRepository.Object.ReturnChatMessages(1);
             // Assert
             Assert.NotNull(result);
-            Assert.Equal("hola", result.First().MessageContent);
-            Assert.Equal("Writer", result.First().WriterUsername);
+            Assert.Equal("hola", result.Messages.First().MessageContent);
+            Assert.Equal("Writer", result.Messages.First().WriterUsername);
         }
     }
 }
