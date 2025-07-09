@@ -1,5 +1,4 @@
-﻿using Gauchada.Backend.Data.Repositories;
-using Gauchada.Backend.Data.Repositories.Interfaces;
+﻿using Gauchada.Backend.Data.Repositories.Interfaces;
 using Gauchada.Backend.Model.DTO;
 using Gauchada.Backend.Model.Entity;
 using Gauchada.Backend.Services.Interfaces;
@@ -113,15 +112,15 @@ namespace Gauchada.Backend.Services
             {
                 var passengers = await _tripRepository.GetTripPassengers(tripId);
                 return passengers.Select(p => new UserDTO
-                (
-                    p.UserName,
-                    p.Name,
-                    p.LastName,
-                    p.Email,
-                    p.Birth,
-                    p.PhoneNumber,
-                    p.PhotoSrc
-                )).ToList();
+                {
+                    UserName = p.UserName,
+                    Name = p.Name,
+                    LastName = p.LastName,
+                    Email = p.Email,
+                    Birth = p.Birth,
+                    PhoneNumber = p.PhoneNumber,
+                    PhotoSrc = p.PhotoSrc ?? ""
+                }).ToList();
             }
             catch (Exception ex)
             {
@@ -189,12 +188,23 @@ namespace Gauchada.Backend.Services
                     Driver = driver,
                     Car = car
                 };
+
                 var tripId = await _tripRepository.CreateTrip(tripEntity);
+
                 await _chatRepository.CreateTripChat(tripId);
+
                 var createdTripEntity = await _tripRepository.GetTripById(tripId);
-                if(createdTripEntity == null)
+
+                if (createdTripEntity == null)
                     throw new Exception("Trip not created");
-                var createdTrip = new TripDTO(createdTripEntity);
+                var createdTrip = new TripDTO                
+                {
+                    Origin = createdTripEntity.Origin,
+                    Destination = createdTripEntity.Destination,
+                    StartDate = createdTripEntity.StartDate,
+                    DriverUserName = createdTripEntity.DriverUserName,
+                    CarPlate = createdTripEntity.CarPlate,
+                };
                 return createdTrip;
             }
             catch (Exception ex)

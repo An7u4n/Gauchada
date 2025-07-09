@@ -5,11 +5,6 @@ using Gauchada.Backend.Model.Entity;
 using Gauchada.Backend.Services;
 using Microsoft.EntityFrameworkCore;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Gauchada.Backend.ApiTest
 {
@@ -53,7 +48,9 @@ namespace Gauchada.Backend.ApiTest
             _dbContext.SaveChanges();
 
             var result = await _userLoginController.Object.DriverLogin(driverUserName, "123456");
-            Assert.Equal(result.Value.Message, "Token Generated");  
+            Assert.NotNull(result);
+            Assert.NotNull(result.Value);
+            Assert.Equal("Token Generated", result.Value.Message);  
         }
     }
 }

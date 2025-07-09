@@ -38,7 +38,7 @@ public class TripsControllerTests : IDisposable
 
     public void Dispose()
     {
-        _dbContext.Dispose();
+        _dbContext?.Dispose();
         _mockTripRepository = null;
         _mockCarRepository = null;
         _mockDriverRepository = null;
@@ -111,7 +111,7 @@ public class TripsControllerTests : IDisposable
         int tripId = 1;
         string passengerUserName = "passengerwhoisnotsaved";
 
-        _dbContext.Trips.Add(new TripEntity()
+        _dbContext?.Trips.Add(new TripEntity()
         {
             CarPlate = "carplate",
             Destination = "destination",
@@ -120,10 +120,10 @@ public class TripsControllerTests : IDisposable
             StartDate = DateTime.Now,
             TripId = tripId
         });
-        _dbContext.SaveChanges();
+        _dbContext?.SaveChanges();
 
         // Act
-        var result = await _controller.AddPassengerToATrip(tripId, passengerUserName);
+        var result = await _controller!.AddPassengerToATrip(tripId, passengerUserName);
 
         // Assert
         var actionResult = Assert.IsType<ActionResult<ControllerResponse>>(result);
@@ -139,7 +139,7 @@ public class TripsControllerTests : IDisposable
         int tripId = 1;
         string passengerUserName = "addedpassenger";
 
-        _dbContext.Passengers.Add(new PassengerEntity()
+        _dbContext?.Passengers.Add(new PassengerEntity()
         {
             UserName = passengerUserName,
             Name = "passengername",
@@ -149,10 +149,10 @@ public class TripsControllerTests : IDisposable
             PhoneNumber = "+54938961681",
             PhotoSrc = "photo.jpg"
         });
-        _dbContext.SaveChanges();
+        _dbContext?.SaveChanges();
 
         // Act
-        var result = await _controller.AddPassengerToATrip(tripId, passengerUserName);
+        var result = await _controller!.AddPassengerToATrip(tripId, passengerUserName);
 
         // Assert
         var actionResult = Assert.IsType<ActionResult<ControllerResponse>>(result);
@@ -168,7 +168,7 @@ public class TripsControllerTests : IDisposable
         int tripId = 1;
         string passengerUserName = "addedpassenger";
 
-        _dbContext.Cars.Add(new CarEntity()
+        _dbContext?.Cars.Add(new CarEntity()
         {
             CarPlate = "carplate",
             Brand = "brand",
@@ -177,8 +177,8 @@ public class TripsControllerTests : IDisposable
             OwnerUserName = "driverusername",
             MaxPassengers = 4
         });
-        _dbContext.SaveChanges();
-        _dbContext.Trips.Add(new TripEntity()
+        _dbContext?.SaveChanges();
+        _dbContext?.Trips.Add(new TripEntity()
         {
             CarPlate = "carplate",
             Destination = "destination",
@@ -188,7 +188,7 @@ public class TripsControllerTests : IDisposable
             TripId = tripId,
             Car = _dbContext.Cars.First()
         });
-        _dbContext.Passengers.Add(new PassengerEntity()
+        _dbContext?.Passengers.Add(new PassengerEntity()
         {
             UserName = passengerUserName,
             Name = "passengername",
@@ -198,10 +198,10 @@ public class TripsControllerTests : IDisposable
             PhoneNumber = "+54938961681",
             PhotoSrc = "photo.jpg"
         });
-        _dbContext.SaveChanges();
+        _dbContext?.SaveChanges();
 
         // Act
-        var result = await _controller.AddPassengerToATrip(tripId, passengerUserName);
+        var result = await _controller!.AddPassengerToATrip(tripId, passengerUserName);
 
         // Assert
         var actionResult = Assert.IsType<ActionResult<ControllerResponse>>(result);
@@ -227,7 +227,7 @@ public class TripsControllerTests : IDisposable
         };
 
         // Act
-        var result = await _controller.PostTrip(notValidTrip);
+        var result = await _controller!.PostTrip(notValidTrip);
 
         // Assert
         var actionResult = Assert.IsType<ActionResult<ControllerResponse>>(result);
@@ -242,7 +242,7 @@ public class TripsControllerTests : IDisposable
         // Arrange
         int tripId = 1;
         string driverUserName = "exitingDriver";
-        _dbContext.Drivers.Add(new DriverEntity()
+        _dbContext?.Drivers.Add(new DriverEntity()
         {
             Name = "asd",
             LastName = "asd",
@@ -252,7 +252,7 @@ public class TripsControllerTests : IDisposable
             UserName = driverUserName,
             PhotoSrc = "photo.jpg"
         });
-        _dbContext.SaveChanges();
+        _dbContext?.SaveChanges();
 
         var notValidTrip = new TripDTO
         {
@@ -265,7 +265,7 @@ public class TripsControllerTests : IDisposable
         };
 
         // Act
-        var result = await _controller.PostTrip(notValidTrip);
+        var result = await _controller!.PostTrip(notValidTrip);
 
         // Assert
         var actionResult = Assert.IsType<ActionResult<ControllerResponse>>(result);

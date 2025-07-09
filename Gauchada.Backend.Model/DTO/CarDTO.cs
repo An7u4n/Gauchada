@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Gauchada.Backend.Model.DTO
+﻿namespace Gauchada.Backend.Model.DTO
 {
     public class CarDTO
     {
-        public string CarPlate { get; set; }
-        public string Brand { get; set; }
-        public string Model { get; set; }
-        public string Color { get; set; }
-        public string OwnerUserName { get; set; }
+        public required string CarPlate { get; set; }
+        public required string Brand { get; set; }
+        public required string Model { get; set; }
+        public required string Color { get; set; }
+        public required string OwnerUserName { get; set; }
         public int MaxPassengers { get; set; }
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             var other = obj as CarDTO;
 
@@ -27,6 +21,11 @@ namespace Gauchada.Backend.Model.DTO
                    this.Color == other.Color &&
                    this.OwnerUserName == other.OwnerUserName &&
                    this.MaxPassengers == other.MaxPassengers;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(CarPlate, Brand, Model, Color, OwnerUserName, MaxPassengers);
         }
     }
 }

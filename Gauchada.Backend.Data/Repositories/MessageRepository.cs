@@ -1,11 +1,6 @@
 ﻿using Gauchada.Backend.Data.Repositories.Interfaces;
 using Gauchada.Backend.Model.Entity;
 using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Gauchada.Backend.Data.Repositories
 {
